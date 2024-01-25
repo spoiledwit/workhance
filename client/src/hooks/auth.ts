@@ -7,8 +7,8 @@ export const login = async (email: string, password: string) => {
     return data;
 };
 
-export const register = async (name: string, email: string, password: string, role:string) => {
-    const { data } = await axios.post(`${import.meta.env.VITE_BASE_URI}/auth/register`, { name, email, password, role });
+export const register = async (name: string, email: string, password: string) => {
+    const { data } = await axios.post(`${import.meta.env.VITE_BASE_URI}/auth/register`, { name, email, password });
     console.log(data);
     localStorage.setItem("token", data.token);
     return data;
@@ -33,19 +33,4 @@ export const loginBack = async () => {
     });
 
     return { user: data, token };
-};
-
-export const getStats = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        return null;
-    }
-
-    const { data } = await axios.get(`${import.meta.env.VITE_BASE_URI}/stats`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-
-    return { stats: data };
 };

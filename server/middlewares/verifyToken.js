@@ -9,6 +9,11 @@ const verifyToken = async (req, res, next) => {
 
         let decodedData;
 
+        if (!token) {
+            res.status(401).json({ message: "Unauthorized" });
+            return;
+        }
+
         if (token && isCustomAuth) {      
             decodedData = jwt.verify(token, process.env.JWT_SECRET);
             req.userId = decodedData?.id;

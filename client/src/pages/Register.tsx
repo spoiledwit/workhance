@@ -9,21 +9,20 @@ import LoadingButton from "../components/Buttons/LoadingButton";
 const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("General"); //["Army Chief", "General", "Colonel"]
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [role, setRole] = useState<string>("Colonel");
   const [loading, setLoading] = useState<boolean>(false);
 
   const { setToken, setUser } = useAuthStore();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!email || !password || !name || !role) {
+    if (!email || !password || !name) {
       toast.error("Please fill all fields");
       return;
     }
     try {
       setLoading(true);
-      const { user, token } = await register(name, email, password, role);
+      const { user, token } = await register(name, email, password);
       setUser(user);
       setToken(token);
       setLoading(false);
@@ -75,22 +74,6 @@ const Register = () => {
                   type="email"
                   placeholder="Email"
                 />
-              </div>
-              <div>
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="role"
-                >
-                  Role
-                </label>
-                <select
-                  onChange={(e) => setRole(e.target.value)}
-                  id="role"
-                  className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:border-violet-500"
-                >
-                  <option value="Colonel">Colonel</option>
-                  <option value="General">General</option>
-                </select>
               </div>
               <div className="mb-4">
                 <label

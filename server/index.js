@@ -3,12 +3,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-
 import authRoutes from "./routes/authRoutes.js";
-import baseRoutes from "./routes/base.js";
-import missileRoutes from "./routes/missile.js";
-import launchRoutes from "./routes/launch.js";
-import statsRouter from "./routes/stats.js";
+import postRoutes from "./routes/postRoutes.js";
+import fileupload from "express-fileupload";
 
 dotenv.config();
 
@@ -20,6 +17,12 @@ app.use(
     credentials: true,
     origin: ["http://localhost:5173"],
   }), 
+);
+app.use(
+  fileupload({
+    useTempFiles: true,
+    limits: { fileSize: 50 * 1024 * 1024 },
+  })
 );
 
 mongoose.set("strictQuery", false);
@@ -44,14 +47,12 @@ db.on("disconnected", () => {
 
 // ROUTES
 app.use("/auth", authRoutes);
-app.use("/base", baseRoutes);
-app.use("/missile", missileRoutes);
-app.use("/launch", launchRoutes);
-app.use("/stats", statsRouter);
+app.use("/posts", postRoutes);
+
 
 //Setting up s3
 
-app.get("*", (req, res)=>{
+app.get("/", (req, res)=>{
   res.send("Server is running!");
 });
 

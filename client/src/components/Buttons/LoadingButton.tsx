@@ -18,7 +18,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({ isLoading, onClick, text}
 
   return (
     <button
-      className={`${isLoading ? "bg-violet-700" : "bg-violet-600"} font-semibold bg-violet-600 hover:bg-violet-700 rounded-xl min-w-[82px] flex items-center justify-center w-full text-center text-white h-12 py-2 px-4 focus:outline-none focus:shadow-outline}`}
+      className={`${isLoading ? " bg-primary" : "bg-primary/90"} font-semibold bg-primary hover:bg-primary/90 rounded-xl min-w-[82px] flex items-center justify-center w-full text-center text-white h-12 py-2 px-4 focus:outline-none focus:shadow-outline}`}
       onClick={handleClick}
     >
       {isLoading ? (

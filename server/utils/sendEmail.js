@@ -1,18 +1,20 @@
 import nodemailer from "nodemailer";
 
 
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "tbcgulfmarketing@gmail.com",
-      pass: "gyqj dwxp nrmo qobv",
-    },
-  });
-
-export default async function sendEmail(email) {
+export const sendEmail = async (email, subject, text) => {
     try {
-        const a = await transporter.sendMail({
-            from: "tbcgulfmarketing@gmail.com",
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: true,
+            service: "gmail",
+            auth: {
+                user: "ahmad.itumun@gmail.com",
+                pass: "ldlenweoabmiwlkh",
+            },
+        });
+       const a = await transporter.sendMail({
+            from: "ahmad.itumun@gmail.com",
             to: email.email,
             subject: email.subject,
             text: email.text,
