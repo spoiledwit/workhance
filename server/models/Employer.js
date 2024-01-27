@@ -27,9 +27,19 @@ const EmployerSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    companySize: {
+        type: String,
+        default: ""
+    },
     isDisabled: {
         type: Boolean,
         default: false
+    },
+    verificationToken: {
+        type: String,
+    },
+    tokenExpiration: {
+        type: Date,
     }
 }, {timestamps: true});
 

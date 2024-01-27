@@ -9,7 +9,7 @@ import { Toaster as Toaster2 } from "./components/ui/toaster";
 
 const Layout = () => {
   
-  const { setUser, setToken } = useAuthStore();
+  const { setUser, setToken, setEmployer } = useAuthStore();
 
   useEffect(() => {
     handleLoginBack();
@@ -21,10 +21,13 @@ const Layout = () => {
       if (!res) {
         setToken("");
         setUser(null);
+        setEmployer(null);
         localStorage.removeItem("token");
         return;
       }
-      setUser(res?.user);
+      setUser(res?.user.user);
+      setEmployer(res?.user.employer);
+      
       if (res?.token) {
         setToken(res.token);
       }

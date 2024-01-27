@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import AuthModel from "../models/Auth.js";
+import EmployerModel from "../models/Employer.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -31,7 +32,7 @@ export const register = async (req, res) => {
     const token = jwt.sign(
       { email: user.email, id: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "2h" }
     );
 
     res.status(201).json({ user, token });
@@ -66,10 +67,10 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { email: user.email, id: user._id },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "2h" }
     );
-
-    res.status(200).json({ user, token });
+    const employer = await EmployerModel.findById(user.employerId);
+    res.status(200).json({ user, token, employer });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -78,7 +79,8 @@ export const login = async (req, res) => {
 export const getUser = async (req, res) => {
   try {
     const user = await AuthModel.findById(req.userId);
-    res.status(200).json(user);
+    const employer = await EmployerModel.findById(user.employerId);
+    res.status(200).json({ user, employer });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

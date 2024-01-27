@@ -15,7 +15,7 @@ const UserRow = ({
   return (
     <Link
       to={`/user/${user._id}`}
-      className="flex space-x-2  cursor-pointer hover:bg-gray-200 p-2"
+      className="flex space-x-2 rounded-lg w-full cursor-pointer hover:bg-gray-200 p-2"
     >
       <img
         className="w-10 h-10 rounded-full object-cover"

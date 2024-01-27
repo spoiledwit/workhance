@@ -75,7 +75,7 @@ const HeaderSection = ({
   };
 
   return (
-    <div className="bg-gray-100 w-full justify-between flex p-10">
+    <div className="bg-gray-100 w-full justify-between flex p-10 max-h-[230px]">
       {edit && (
         <EditProfile
           open={edit}

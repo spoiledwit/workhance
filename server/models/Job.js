@@ -1,96 +1,89 @@
 import mongoose from "mongoose";
 
-const CompanyInfoSchema = new mongoose.Schema({
-    employerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Auth",
-        required: true
-    },
+const CompanyInfoSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        default: ""
+      type: String,
+      required: true,
     },
     website: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     logo: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     employeeCount: {
-        type: Number,
-        default: 0
-    }
-}, {timestamps: true});
+      type: String,
+      default: "",
+    },
+  },
+  { timestamps: true }
+);
 
-const JobSchema = new mongoose.Schema({
+const JobSchema = new mongoose.Schema(
+  {
     companyInfo: {
-        type: CompanyInfoSchema,
-        required: true
+      type: CompanyInfoSchema,
+      required: true,
     },
     employerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Auth",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Employer",
+      required: true,
     },
     jobTitle: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     jobDescription: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     jobType: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     advertisingLocation: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     salary: {
-        exactAmount: {
-            type: Number,
-            default: null
-        },
-        range: {
-            min: {
-                type: Number,
-                default: null
-            },
-            max: {
-                type: Number,
-                default: null
-            }
-        },
-        startingAmount: {
-            type: Number,
-            default: null
-        },
-        maxAmount: {
-            type: Number,
-            default: null
-        }
+      min: {
+        type: Number,
+        default: null,
+      },
+      max: {
+        type: Number,
+        default: null,
+      },
     },
     updatesEmail: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     requireCv: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
+    applications: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Application",
+      },
+    ],
     status: {
-        type: String,
-        default: "active"
-    }
-}, {timestamps: true});
+      type: String,
+      default: "pending",
+    },
+  },
+  { timestamps: true }
+);
 
 const JobModel = mongoose.model("Job", JobSchema);
 export default JobModel;

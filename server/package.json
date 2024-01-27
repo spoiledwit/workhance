@@ -22,8 +22,10 @@
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.3",
+    "nodemailer": "^6.9.8",
     "nodemon": "^2.0.20",
     "socket.io": "^4.6.1",
-    "stripe": "^12.7.0"
+    "stripe": "^12.7.0",
+    "uuid": "^9.0.1"
   }
 }

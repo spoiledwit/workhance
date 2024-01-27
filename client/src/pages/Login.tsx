@@ -14,7 +14,7 @@ const Login = () => {
     const [password, setPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
-    const { setToken, setUser } = useAuthStore();
+    const { setToken, setUser, setEmployer } = useAuthStore();
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (!email || !password) {
@@ -23,9 +23,10 @@ const Login = () => {
         }
         try {
             setLoading(true);
-            const { user, token } = await login(email, password);
+            const { user, token, employer } = await login(email, password);
             setUser(user);
             setToken(token);
+            setEmployer(employer);
             setLoading(false);
             toast.success("Logined successfully");
             navigate("/");

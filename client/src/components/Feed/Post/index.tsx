@@ -9,7 +9,7 @@ const Post = ({ post, setPosts }: { post: BigPost, setPosts:any }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex mt-6 flex-col w-full rounded-md border">
+    <div className="flex flex-col w-full rounded-md border">
       <UserRow user={post.authorId} sliceNum={70} createdAt={post.createdAt} />
       <hr />
       <div className="flex p-3 flex-col gap-3">

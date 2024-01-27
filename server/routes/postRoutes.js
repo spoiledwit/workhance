@@ -1,11 +1,12 @@
 import express from "express";
-import {createPost, getPosts, likePost, disLikePost, commentPost, getComments} from "../controllers/Post.js";
+import {createPost, getPosts, likePost, disLikePost, commentPost, getComments, getPostsByUserId} from "../controllers/Post.js";
 import verifyToken from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
 router.post("/", verifyToken, createPost);
 router.get("/", getPosts);
+router.get("/user/:id", getPostsByUserId);
 router.put("/:id/like", verifyToken, likePost);
 router.put("/:id/dislike", verifyToken, disLikePost);
 router.post("/:id/comment", verifyToken, commentPost);

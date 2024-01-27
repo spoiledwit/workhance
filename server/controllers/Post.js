@@ -39,7 +39,22 @@ export const getPosts = async (req, res) => {
     const posts = await PostModel.find().populate(
       "authorId",
       "name email bio profilePicture followers"
-    );
+    ).sort({createdAt: -1});
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getPostsByUserId = async (req, res) => {
+  try {
+    const posts = await PostModel.find({
+      authorId: req.params.id,
+    }).populate(
+      "authorId",
+      "name email bio profilePicture followers"
+    ).sort({createdAt: -1});
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);

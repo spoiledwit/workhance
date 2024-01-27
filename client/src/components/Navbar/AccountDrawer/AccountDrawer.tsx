@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Icon from "./Icon";
 import { FiUser, FiLogOut } from "react-icons/fi";
-import { RiNotification4Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
 import { logout } from "@/hooks/auth";
@@ -63,10 +62,10 @@ const AccountDrawer = () => {
               <FiUser size={17} className=" text-parimary" />
               Profile
             </Link>
-            <button className="flex items-center bg-white w-full gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200">
+            {/* <button className="flex items-center bg-white w-full gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200">
               <RiNotification4Line size={17} className=" text-primary" />
               Notifications
-            </button>
+            </button> */}
             <div
               onClick={handleSignOut}
               className="flex items-center gap-2 px-3 py-2 text-gray-800 text-sm cursor-pointer rounded-lg hover:bg-gray-200"

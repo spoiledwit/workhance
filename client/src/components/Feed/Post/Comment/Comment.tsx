@@ -18,7 +18,6 @@ interface CommentType {
   postId: string;
   createdAt: string;
   updatedAt: string;
-  __v: number;
 }
 
 const Comment: React.FC<{ comment: CommentType }> = ({ comment }) => {

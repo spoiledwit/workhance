@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { navLinks } from "../../constants";
 import LoadingButton from "../Buttons/LoadingButton";
 import styles from "../../styles/navbar.module.css";
 import { Link } from "react-router-dom";
@@ -10,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../hooks/auth";
 import logo from "@/assets/workhance.png";
 import AccountDrawer from "./AccountDrawer/AccountDrawer";
+import { IoMdNotifications } from "react-icons/io";
+import SearchBar from "./Search";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -60,8 +61,17 @@ const Navbar = () => {
               type="button"
             />
           )}
-           {user && (
-            <AccountDrawer />
+          {user && (
+            <div className="flex items-center gap-3">
+              <SearchBar />
+              <Link to={"/post-job"}
+              className="text-gray-600 font-medium hover:text-primary hover:underline"
+              >Post a Job</Link>
+              <div>
+                <IoMdNotifications className="text-2xl text-gray-500" />
+              </div>
+              <AccountDrawer />
+            </div>
           )}
         </span>
 

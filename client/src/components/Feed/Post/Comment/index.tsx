@@ -38,6 +38,7 @@ const Commentor = ({ post, setPosts }: { post: Post; setPosts: any }) => {
       {post._id && <PostComment postId={post._id} setPosts={setPosts} />}
       {loading && <div>Loading...</div>}
       {comments?.map((comment) => (
+        //@ts-ignore
         <Comment comment={comment} key={comment._id} />
       ))}
     </div>
