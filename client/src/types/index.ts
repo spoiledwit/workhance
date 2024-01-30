@@ -5,6 +5,8 @@ type User = {
     profilePicture?: string;
     posts?: string[]
     bio?: string;
+    educations?: any[];
+    workExperiences?: any[];
     followers: string[];
     conversations?: string[];
     recommendations?: string[];
