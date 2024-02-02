@@ -25,18 +25,14 @@ import axios from "axios";
 import { useState } from "react";
 
 const schema = z.object({
-  school: z
+  company: z
     .string()
-    .min(2, { message: "School name is too short" })
-    .max(50, { message: "School name is too long" }),
-  degree: z
+    .min(2, { message: "Company name is too short" })
+    .max(255, { message: "Company name is too long" }),
+  position: z
     .string()
-    .min(2, { message: "Degree name is too short" })
-    .max(50, { message: "Degree name is too long" }),
-  fieldofstudy: z
-    .string()
-    .min(2, { message: "Field of study is too short" })
-    .max(50, { message: "Field of study is too long" }),
+    .min(2, { message: "Position is too short" })
+    .max(255, { message: "Position is too long" }),
   startYear: z
     .string()
     .min(4, { message: "Start year is too short" })
@@ -45,20 +41,14 @@ const schema = z.object({
     .string()
     .min(4, { message: "End year is too short" })
     .max(4, { message: "End year is too long" }),
-  grade: z
-    .string()
-    .min(1, { message: "Grade is too short" })
-    .max(50, { message: "Grade is too long" })
-    .optional(),
   description: z
     .string()
     .min(2, { message: "Description is too short" })
-    .max(50, { message: "Description is too long" })
-    .optional(),
+    .max(255, { message: "Description is too long" }),
   isCurrent: z.boolean().optional(),
 });
 
-const AddEducation = ({
+const AddWork = ({
   open,
   setOpen,
 }: {
@@ -72,11 +62,11 @@ const AddEducation = ({
     resolver: zodResolver(schema),
   });
 
-  const handleAddEducation = async (values: any) => {
+  const handleAddWork = async (values: any) => {
     try {
       setLoading(true);
       await axios.post(
-        `${import.meta.env.VITE_BASE_URI}/auth/education`,
+        `${import.meta.env.VITE_BASE_URI}/auth/Work`,
         {
           values,
         },
@@ -98,26 +88,30 @@ const AddEducation = ({
     <Dialog onOpenChange={(open) => setOpen(open)} open={open}>
       <DialogContent className="max-h-[600px] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add Education</DialogTitle>
+          <DialogTitle>Add Work</DialogTitle>
           <DialogDescription>
-            Add any school, bootcamp, etc that you have attended
+            Add any Work experience that you have had in the past
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(handleAddEducation)}
+            onSubmit={form.handleSubmit(handleAddWork)}
             className="space-y-3 w-full max-w-[800px]"
           >
             <FormField
               control={form.control}
-              name="school"
+              name="company"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>School or Bootcamp</FormLabel>
+                  <FormLabel>Company Name</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder="MIT" {...field} />
+                    <Input
+                      disabled={loading}
+                      placeholder="Microsoft"
+                      {...field}
+                    />
                   </FormControl>
-                  <FormDescription>What school did you go to?</FormDescription>
+                  <FormDescription>What is the company name?</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -125,40 +119,19 @@ const AddEducation = ({
 
             <FormField
               control={form.control}
-              name="degree"
+              name="position"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Degree or Certificate</FormLabel>
+                  <FormLabel>Position</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Software Engineering"
+                      placeholder="Sr. Software Developer"
                       {...field}
                     />
                   </FormControl>
                   <FormDescription>
-                    What is your degree or certificate?
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="fieldofstudy"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Field Of Study</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={loading}
-                      placeholder="Computer Science"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    What is your field of study?
+                    What is your position at the company?
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -197,21 +170,6 @@ const AddEducation = ({
 
             <FormField
               control={form.control}
-              name="grade"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Grade</FormLabel>
-                  <FormControl>
-                    <Input disabled={loading} placeholder="A" {...field} />
-                  </FormControl>
-                  <FormDescription>What is your grade?</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name="description"
               render={({ field }) => (
                 <FormItem>
@@ -236,7 +194,7 @@ const AddEducation = ({
               name="isCurrent"
               render={({ field }) => (
                 <FormItem className="flex items-center gap-3">
-                  <FormLabel>Are you currently studying here?</FormLabel>
+                  <FormLabel>Are you currently working here?</FormLabel>
                   <FormControl>
                     <Input
                       className="w-3 h-3"
@@ -271,4 +229,4 @@ const AddEducation = ({
   );
 };
 
-export default AddEducation;
+export default AddWork;
