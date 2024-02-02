@@ -70,3 +70,15 @@ export const getJobById = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getMyJobs = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const employer = await EmployerModel.findOne({
+      userId: userId,
+    });
+    // const jobs = 
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
