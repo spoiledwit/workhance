@@ -185,3 +185,59 @@ export const unfollowUser = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const addEducation = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { values: education } = req.body;
+    const user = await AuthModel.findById(userId);
+    user.educations.push(education);
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const addWorkExperience = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { values: workExperience } = req.body;
+    const user = await AuthModel.findById(userId);
+    user.workExperiences.push(workExperience);
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const deleteEducation = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { educationId } = req.params;
+    const user = await AuthModel.findById(userId);
+    user.educations = user.educations.filter(
+      (edu) => edu._id.toString() !== educationId
+    );
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const deleteWorkExperience = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { workExperienceId } = req.params;
+    const user = await AuthModel.findById(userId);
+    user.workExperiences = user.workExperiences.filter(
+      (work) => work._id.toString() !== workExperienceId
+    );
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
