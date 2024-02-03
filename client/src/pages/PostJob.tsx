@@ -8,7 +8,7 @@ const PostJob = () => {
 
   return (
     <div className="px-32 py-10">
-      {user && !employer && <EmployerReg />}
+      {user && !employer && <EmployerReg />}  
       {employer && !employer?.isVerified && <EmployerVerification />}
       {employer && employer?.isVerified && <PostJobForm />}
     </div>

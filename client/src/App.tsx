@@ -10,7 +10,6 @@ import Jobs from "./pages/Jobs";
 import Job from "./pages/Job";
 import Dashboard from "./pages/Dashboard";
 import Jobposts from "./components/Dashboard/JobPosts/Jobposts";
-import DashboardHome from "./components/Dashboard/Home/DashboardHome";
 import Candidates from "./components/Dashboard/Candidates/Candidates";
 
 const App = () => {

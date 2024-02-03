@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
     return (
         <>
-            <div className='w-[60px] bg-[#2D2D2D] gap-2 h-full delay-300 hover:w-[200px] transition-all'>
+            <div className='w-[60px] bg-[#2D2D2D] gap-2 h-full delay-500 hover:w-[200px] transition-all'>
                 <Link to={'/dashboard'}>
                     <div className='flex flex-row justify-start items-center hover:bg-[#5f5f5f] transition-all rounded p-2 m-2 '>
                         <BiMenu size={25} color={"#ffffff"} />
