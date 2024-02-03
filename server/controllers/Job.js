@@ -1,5 +1,6 @@
 import JobModel from "../models/Job.js";
 import EmployerModel from "../models/Employer.js";
+import ApplicationModel from "../models/Application.js";
 import AuthModel from "../models/Auth.js";
 
 export const createJob = async (req, res) => {
@@ -90,11 +91,10 @@ export const getMyJobs = async (req, res) => {
   }
 };
 
-export const updateJob = async (req, res)=> {
+export const updateJob = async (req, res) => {
   try {
     const userId = req.userId;
-    const employer = await EmployerModel.findOne({ userId
-    });
+    const employer = await EmployerModel.findOne({ userId });
     const jobId = req.params.id;
     const job = await JobModel.findById(jobId);
     if (!job) {
@@ -112,8 +112,7 @@ export const updateJob = async (req, res)=> {
       updatesEmail,
       requireCv,
     } = req.body;
-    await JobModel.findByIdAndUpdate
-    (jobId, {
+    await JobModel.findByIdAndUpdate(jobId, {
       jobTitle,
       jobDescription,
       jobType,
@@ -126,4 +125,27 @@ export const updateJob = async (req, res)=> {
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
-}
+};
+
+export const deleteJob = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const employer = await EmployerModel.findOne({ userId });
+    const jobId = req.params.id;
+    const job = await JobModel.findById(jobId);
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+    if (job.employerId.toString() !== employer._id.toString()) {
+      return res.status(401).json({ message: "Only the employer can delete" });
+    }
+    await JobModel.findByIdAndDelete(jobId);
+    await EmployerModel.findByIdAndUpdate(employer._id, {
+      $pull: { postedJobs: jobId },
+    });
+    await ApplicationModel.deleteMany({ jobId });
+    res.status(200).json({ message: "Job deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
