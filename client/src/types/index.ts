@@ -17,6 +17,7 @@ type User = {
     updatedAt?: string;
 };
 
+
 type Post = {
     _id?: string;
     caption: string;

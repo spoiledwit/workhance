@@ -4,6 +4,7 @@ import { FiUser, FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
 import { logout } from "@/hooks/auth";
+import { BiGridAlt } from "react-icons/bi";
 
 const AccountDrawer = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -61,6 +62,13 @@ const AccountDrawer = () => {
             >
               <FiUser size={17} className=" text-parimary" />
               Profile
+            </Link>
+            <Link
+              to={`/dashboard`}
+              className="flex items-center gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200"
+            >
+              <BiGridAlt size={17} className=" text-parimary" />
+              Dashboard
             </Link>
             {/* <button className="flex items-center bg-white w-full gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200">
               <RiNotification4Line size={17} className=" text-primary" />
