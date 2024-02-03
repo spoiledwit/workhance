@@ -3,7 +3,7 @@ import DashboardHome from '@/components/Dashboard/Home/DashboardHome'
 import Jobposts from '@/components/Dashboard/JobPosts/Jobposts'
 import Sidebar from '@/components/Dashboard/Navbar/Sidebar'
 import React from 'react'
-import { useLocation, redirect, Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import useAuthStore from "@/store/authStore";
 
 interface DashboardProps {
@@ -16,7 +16,7 @@ const Dashboard: React.FC<DashboardProps> = ({ children }) => {
     const { user, employer } = useAuthStore();
 
     console.log(user);
-    console.log(employer    );
+    console.log(employer);
 
     if (!user || !employer) {
         return (
