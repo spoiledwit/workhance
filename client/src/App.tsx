@@ -13,6 +13,7 @@ import Jobposts from "./components/Dashboard/JobPosts/Jobposts";
 import Candidates from "./components/Dashboard/Candidates/Candidates";
 import JobDetails from "./components/Dashboard/JobPosts/JobDetails";
 import CandidateDetails from "./components/Dashboard/Candidates/CandidateDetails";
+import JobUpdateForm from "./components/Dashboard/JobPosts/JobUpdateForm";
 
 const App = () => {
   const { user } = useAuthStore();
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="dashboard" element={<Dashboard> </Dashboard>} >
             <Route path="job-posts" element={<Jobposts />} />
             <Route path="job-details" element={<JobDetails />} />
+            <Route path="job-update" element={<JobUpdateForm />} />
             <Route path="candidates" element={<Candidates />} />
             <Route path="candidate-details" element={<CandidateDetails />} />
           </Route>

@@ -8,89 +8,35 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Candidate } from "@/types";
-import { Link } from "react-router-dom";
-
-const testData = [
-    {
-        "applicant": {
-            "_id": "65b11a350d95903f19815a63",
-            "name": "Ahmad Ashfaq",
-            "email": "spoiledwit@gmail.com",
-            "hashedPassword": "$2a$10$pUoHgcv590RE2yx2cRBnsOw5Xy9oqI6YWhIaBgdx2Tubd.vMBb6Ai",
-            "role": "user",
-            "__v": 13,
-            "bio": "Computer scientist, Founding President ITU MUN society, MERN | Three js | TensorflowaMUN society, MERN | Three js | TensorflowMUN society, MERN | Three js | TensorflowMUN society, MERN | Three js | TensorflowMUN society, MERN | Three js | TensorflowMUN society, MERN | Three js | Tensorflow",
-            "conversations": [],
-            "followers": [
-                "65b153cba692ae4917ec5e78",
-                "65b380e38ddc28f463a7f6f2",
-                "65b15bba033d8d7ae8dc332d",
-                "65bd015437fdf27d0eeb3c9d"
-            ],
-            "isBlocked": false,
-            "posts": [],
-            "profilePicture": "https://res.cloudinary.com/dlxtcvj93/image/upload/v1706119071/yvd8ogytp5a76ilnwyqj.jpg",
-            "recommendations": [],
-            "updatedAt": "2024-02-02T14:52:33.855Z",
-            "employerId": "65b4e357745f501f2fec2252",
-            "educations": [
-                {
-                    "school": "MIT",
-                    "degree": "Software Engineering",
-                    "fieldOfStudy": "",
-                    "startYear": "2019",
-                    "endYear": "2024",
-                    "grade": "A",
-                    "description": "Software house",
-                    "isCurrent": true,
-                    "_id": "65bb7d21b6e0bb137baa00e0"
-                }
-            ],
-            "workExperiences": []
-        },
-        "job": {
-            "salary": {
-                "min": 700,
-                "max": 2000
-            },
-            "_id": "65b4e3b9745f501f2fec2265",
-            "companyInfo": {
-                "name": "TBCGULF",
-                "email": "spoiledwit@gmail.com",
-                "website": "https://tbcgulf.com",
-                "logo": "",
-                "employeeCount": "51-200",
-                "_id": "65b4e3b9745f501f2fec2266",
-                "createdAt": "2024-01-27T11:06:33.832Z",
-                "updatedAt": "2024-01-27T11:06:33.832Z"
-            },
-            "employerId": "65b4e357745f501f2fec2252",
-            "jobTitle": "Senior Software Developer",
-            "jobDescription": "Must have problem solving skills",
-            "jobType": "part-time",
-            "advertisingLocation": "Dubai - United Arab Emirates",
-            "updatesEmail": "spoiledwit@gmail.com",
-            "requireCv": true,
-            "applications": [
-                "65b4e3f466bb6d7af609714a"
-            ],
-            "status": "pending",
-            "createdAt": "2024-01-27T11:06:33.832Z",
-            "updatedAt": "2024-01-27T11:07:32.238Z",
-            "__v": 0
-        },
-        "status": "pending",
-        "cv": "https://res.cloudinary.com/dcdmvp7au/raw/upload/v1706353650/workhance/bgs8pxw8jmtypmcqkmph"
-    },
-];
-
-type CandidateState = {
-    pathname: string,
-    state?: Candidate
-}
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Candidates = () => {
+
+    const [candidates, setCandidates] = useState<any[]>([])
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        handleFetchMyCandidates();
+    })
+
+    const handleFetchMyCandidates = async () => {
+        try {
+            const res = await axios.get(
+                `${import.meta.env.VITE_BASE_URI}/application/my-candidates`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }
+            );
+            setCandidates(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             <div>
@@ -107,17 +53,21 @@ const Candidates = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody className="">
-                    {testData.map((app) => (
-                        <TableRow key={app.applicant._id}>
+                    {candidates?.map((app) => (
+                        <TableRow key={app?.applicant._id}>
                             <TableCell className="font-medium flex flex-row items-center gap-3">
-                                <img src={app.applicant.profilePicture} className="w-[3rem] rounded-full" /><p>{app.applicant.name}</p>
+                                <img src={app?.applicant.profilePicture} className="w-[3rem] rounded-full" /><p>{app?.applicant.name}</p>
                             </TableCell>
-                            <TableCell>{app.applicant.email}</TableCell>
-                            <TableCell className="max-w-[600px] text-nowrap overflow-clip">{app.applicant.bio}</TableCell>
+                            <TableCell>{app?.applicant.email}</TableCell>
+                            <TableCell className="max-w-[600px] text-nowrap overflow-clip">{app?.applicant.bio}</TableCell>
                             <TableCell className="text-right ">
                                 {/* <TableCell className="text-right"><Link to={{ pathname: '/dashboard/job-details', state: job } as JobState}><button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">View</button></Link></TableCell> */}
-                                <Link to={{ pathname: "/dashboard/candidate-details", state: app } as CandidateState}><button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">Applicant Details</button></Link>
-                                <button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all ml-2">View Job</button>
+                                <button
+                                    onClick={() => navigate(`/dashboard/candidate-details`, { state: app })}
+                                    className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">Applicant Details</button>
+                                <button
+                                    onClick={() => navigate(`/dashboard/job-details`, { state: app.job })}
+                                    className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all ml-2">View Job</button>
                             </TableCell>
                         </TableRow>
                     ))}
@@ -128,7 +78,7 @@ const Candidates = () => {
                         <TableCell className="text-right">$2,500.00</TableCell>
                     </TableRow>
                 </TableFooter> */}
-            </Table>
+            </Table >
         </>
     )
 }

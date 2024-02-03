@@ -7,6 +7,7 @@ import { useLocation, Link } from 'react-router-dom'
 import useAuthStore from "@/store/authStore";
 import JobDetails from '@/components/Dashboard/JobPosts/JobDetails'
 import CandidateDetails from '@/components/Dashboard/Candidates/CandidateDetails'
+import JobUpdateForm from '@/components/Dashboard/JobPosts/JobUpdateForm'
 
 interface DashboardProps {
     children: React.ReactNode;
@@ -64,6 +65,9 @@ const Dashboard: React.FC<DashboardProps> = ({ children }) => {
                     }
                     {
                         path.pathname === '/dashboard/candidate-details' && <CandidateDetails />
+                    }
+                    {
+                        path.pathname === '/dashboard/job-update' && <JobUpdateForm />
                     }
                 </div>
 

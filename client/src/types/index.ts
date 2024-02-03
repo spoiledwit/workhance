@@ -142,8 +142,8 @@ type CompanyInfo = {
 type JobDetail = {
 
     salary?: {
-        min?: Number,
-        max?: Number
+        min?: number,
+        max?: number
     },
     _id?: string,
     companyInfo: {
@@ -162,7 +162,7 @@ type JobDetail = {
     jobType: string,
     advertisingLocation?: string,
     updatesEmail?: string,
-    requireCv: Boolean,
+    requireCv: boolean,
     applications?: String[],
     status?: string,
     updatedAt: string,
@@ -172,7 +172,9 @@ type JobDetail = {
 
 type Candidate = {
     applicant: User,
-    job: JobDetail
+    job: JobDetail,
+    cv: string,
+    id: string
 }
 
 export type { User, Post, Comment, Recommendation, Conversation, Message, Employer, Employee, SupportTicket, Job, CompanyInfo, JobDetail, Candidate };
