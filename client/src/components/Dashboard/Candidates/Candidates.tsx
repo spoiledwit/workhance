@@ -8,51 +8,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-
-const invoices = [
-    {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-]
+import { Candidate } from "@/types";
+import { Link } from "react-router-dom";
 
 const testData = [
     {
@@ -128,6 +85,10 @@ const testData = [
     },
 ];
 
+type CandidateState = {
+    pathname: string,
+    state?: Candidate
+}
 
 const Candidates = () => {
     return (
@@ -154,7 +115,8 @@ const Candidates = () => {
                             <TableCell>{app.applicant.email}</TableCell>
                             <TableCell className="max-w-[600px] text-nowrap overflow-clip">{app.applicant.bio}</TableCell>
                             <TableCell className="text-right ">
-                                <button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">Applicant Details</button>
+                                {/* <TableCell className="text-right"><Link to={{ pathname: '/dashboard/job-details', state: job } as JobState}><button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">View</button></Link></TableCell> */}
+                                <Link to={{ pathname: "/dashboard/candidate-details", state: app } as CandidateState}><button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">Applicant Details</button></Link>
                                 <button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all ml-2">View Job</button>
                             </TableCell>
                         </TableRow>

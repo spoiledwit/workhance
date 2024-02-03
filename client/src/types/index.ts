@@ -15,6 +15,7 @@ type User = {
     isBlocked?: boolean;
     createdAt?: string;
     updatedAt?: string;
+    hashedPassword?: string;
 };
 
 
@@ -138,4 +139,40 @@ type CompanyInfo = {
     updatedAt: string;
 }
 
-export type { User, Post, Comment, Recommendation, Conversation, Message, Employer, Employee, SupportTicket, Job, CompanyInfo };
+type JobDetail = {
+
+    salary?: {
+        min?: Number,
+        max?: Number
+    },
+    _id?: string,
+    companyInfo: {
+        name: string,
+        email: string,
+        website?: string,
+        logo: string,
+        employeeCount: string,
+        _id: string,
+        createdAt: string,
+        updatedAt: string
+    },
+    employerId: string,
+    jobTitle: string,
+    jobDescription: string,
+    jobType: string,
+    advertisingLocation?: string,
+    updatesEmail?: string,
+    requireCv: Boolean,
+    applications?: String[],
+    status?: string,
+    updatedAt: string,
+    createdAt: string,
+    __v: Number
+}
+
+type Candidate = {
+    applicant: User,
+    job: JobDetail
+}
+
+export type { User, Post, Comment, Recommendation, Conversation, Message, Employer, Employee, SupportTicket, Job, CompanyInfo, JobDetail, Candidate };

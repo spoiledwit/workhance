@@ -9,51 +9,9 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { capitalizeFirstLetter } from "@/lib/utils";
-
-const invoices = [
-    {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-]
+import Job from "@/pages/Job";
+import { JobDetail } from "@/types";
+import { Link } from "react-router-dom";
 
 const testData = [
     {
@@ -203,6 +161,11 @@ const testData = [
 
 const jobPosts = testData[0].jobs;
 
+type JobState = {
+    pathname: string;
+    state?: JobDetail; // Replace 'any' with the type of your object if known
+};
+
 const Jobposts = () => {
     return (
         <>
@@ -215,7 +178,7 @@ const Jobposts = () => {
                     <TableRow>
                         <TableHead className="">Title</TableHead>
                         <TableHead>Description</TableHead>
-                        <TableHead>Type</TableHead>
+                        <TableHead className="pl-7">Type</TableHead>
                         <TableHead className="">Salary</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>
@@ -224,10 +187,11 @@ const Jobposts = () => {
                     {jobPosts.map((job) => (
                         <TableRow key={job._id}>
                             <TableCell className="font-medium">{job.jobTitle}</TableCell>
-                            <TableCell>{job.jobDescription}</TableCell>
-                            <TableCell>{capitalizeFirstLetter(job.jobType)}</TableCell>
+                            <TableCell className="max-w-[500px] text-nowrap overflow-clip ">{job.jobDescription}{job.jobDescription}{job.jobDescription}{job.jobDescription}</TableCell>
+                            <TableCell className="min-w-[100px] pl-7">{capitalizeFirstLetter(job.jobType)}</TableCell>
                             <TableCell className="">{job.salary.min} - {job.salary.max} (AED)</TableCell>
-                            <TableCell className="text-right"><button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">View</button></TableCell>
+                            <TableCell className="text-right"><Link to={{ pathname: '/dashboard/job-details', state: job } as JobState}><button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">View</button></Link></TableCell>
+                            {/* <TableCell className="text-right"><Link to="/dashboard/job-details"><button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">View</button></Link></TableCell> */}
                         </TableRow>
                     ))}
                 </TableBody>
@@ -237,9 +201,9 @@ const Jobposts = () => {
                         <TableCell className="">$2,500.00</TableCell>
                     </TableRow> */}
                 {/* </TableFooter> */}
-            </Table>
+            </Table >
         </>
     )
 }
 
-export default Jobposts
+export default Jobposts;

@@ -5,6 +5,8 @@ import Sidebar from '@/components/Dashboard/Navbar/Sidebar'
 import React from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import useAuthStore from "@/store/authStore";
+import JobDetails from '@/components/Dashboard/JobPosts/JobDetails'
+import CandidateDetails from '@/components/Dashboard/Candidates/CandidateDetails'
 
 interface DashboardProps {
     children: React.ReactNode;
@@ -14,9 +16,6 @@ const Dashboard: React.FC<DashboardProps> = ({ children }) => {
 
     const path = useLocation();
     const { user, employer } = useAuthStore();
-
-    console.log(user);
-    console.log(employer);
 
     if (!user || !employer) {
         return (
@@ -59,6 +58,12 @@ const Dashboard: React.FC<DashboardProps> = ({ children }) => {
                     }
                     {
                         path.pathname === '/dashboard/candidates' && <Candidates />
+                    }
+                    {
+                        path.pathname === '/dashboard/job-details' && <JobDetails />
+                    }
+                    {
+                        path.pathname === '/dashboard/candidate-details' && <CandidateDetails />
                     }
                 </div>
 
