@@ -1,5 +1,7 @@
 import ApplicationModel from "../models/Application.js";
 import JobModel from "../models/Job.js";
+import AuthModel from "../models/Auth.js";
+import EmployerModel from "../models/Employer.js";
 
 export const createApplication = async (req, res) => {
   try {
@@ -10,7 +12,6 @@ export const createApplication = async (req, res) => {
       applicantId,
       jobId,
     });
-
 
     const job = await JobModel.findById(jobId);
 
@@ -23,7 +24,6 @@ export const createApplication = async (req, res) => {
         .status(400)
         .json({ message: "You cannot apply to your own job" });
     }
-
 
     if (existingApplication) {
       return res.status(400).json({ message: "You have already applied" });
@@ -46,3 +46,55 @@ export const createApplication = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const getAllMyCandidates = async (req, res) => {
+  try {
+    const userId = req.userId;
+    // fetching the employer
+    const employer = await EmployerModel.findOne({ userId: userId });
+    // now for all the jobs posted by the employer we will fetch the applications
+    const jobsIds = employer.postedJobs;
+    const allApplications = await ApplicationModel.find({
+      jobId: { $in: jobsIds },
+    })
+      .populate("applicantId")
+      .populate("jobId");
+    // now renaming the applicantId to applicant and jobId to job
+    const formattedApplications = allApplications.map((application) => {
+      return {
+        applicant: application.applicantId,
+        job: application.jobId,
+        status: application.status,
+        cv: application.cv,
+        id: application._id,
+      };
+    });
+    res.status(200).json(formattedApplications);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const deleteApplication  = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const employer = await EmployerModel.findOne({ userId });
+    const applicationId = req.params.id;
+    const application = await ApplicationModel.findById(applicationId);
+    if (!application) {
+      return res.status(404).json({ message: "Application not found" });
+    }
+    const jobId = application.jobId;
+    if (!employer.postedJobs.includes(jobId)) {
+      return res.status(401).json({ message: "Only the employer can delete" });
+    }
+    await ApplicationModel.findByIdAndDelete(applicationId);
+    await JobModel.findByIdAndUpdate(application.jobId, {
+      $pull: { applications: applicationId },
+    });
+    res.status(200).json({ message: "Application deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+}
