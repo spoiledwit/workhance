@@ -15,7 +15,7 @@ const AdminLayout = () => {
         <Link
         to={"/login"}
         >
-          <p className="bg-violet-800 hover:bg-violet-900 text-white px-4 py-2 rounded-lg mt-4">
+          <p className="bg-primary hover:bg-primary text-white px-4 py-2 rounded-lg mt-4">
             Login
           </p>
         </Link>

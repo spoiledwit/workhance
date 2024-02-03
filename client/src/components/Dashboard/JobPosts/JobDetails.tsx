@@ -1,5 +1,5 @@
 import { Job, JobDetail } from '@/types';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 
 type JobData = {
@@ -8,9 +8,13 @@ type JobData = {
 
 const JobDetails = () => {
 
-    const location = useLocation() as JobData;
-    // const job = location.state;
-    console.log(location);
+    const location = useLocation();
+
+    useEffect(() => {
+        console.log(location);
+    }
+    , [location]);
+
 
     return (
         <>
