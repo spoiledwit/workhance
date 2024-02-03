@@ -74,11 +74,56 @@ export const getJobById = async (req, res) => {
 export const getMyJobs = async (req, res) => {
   try {
     const userId = req.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
     const employer = await EmployerModel.findOne({
       userId: userId,
     });
-    // const jobs = 
+    const jobs = await JobModel.find({ employerId: employer._id });
+    res.status(200).json({
+      employerProfile: employer,
+      jobs: jobs,
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const updateJob = async (req, res)=> {
+  try {
+    const userId = req.userId;
+    const employer = await EmployerModel.findOne({ userId
+    });
+    const jobId = req.params.id;
+    const job = await JobModel.findById(jobId);
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+    if (job.employerId.toString() !== employer._id.toString()) {
+      return res.status(401).json({ message: "Only the employer can update" });
+    }
+    const {
+      jobTitle,
+      jobDescription,
+      jobType,
+      advertisingLocation,
+      salary,
+      updatesEmail,
+      requireCv,
+    } = req.body;
+    await JobModel.findByIdAndUpdate
+    (jobId, {
+      jobTitle,
+      jobDescription,
+      jobType,
+      advertisingLocation,
+      salary,
+      updatesEmail,
+      requireCv,
+    });
+    res.status(200).json({ message: "Job updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+}
