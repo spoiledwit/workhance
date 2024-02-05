@@ -2,11 +2,8 @@ import { Candidate } from '@/types';
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { BiDownload } from "react-icons/bi";
 import { format } from "timeago.js";
-
-type CandidateData = {
-    state?: Candidate
-}
 
 const CandidateDetails = () => {
 
@@ -48,9 +45,11 @@ const CandidateDetails = () => {
                         <Link to={`/user/${candidate.applicant._id}`} className='border text-center border-[#2d2d2d] hover:bg-[#2d2d2d] hover:text-white transition-all text-[#2d2d2d] w-1/6 py-1 rounded'><button >Visit Profile</button></Link>
                     </div>
                     <hr className='my-3' />
-                    <h2 className='text-xl font-semibold mb-1'>Resume / CV</h2>
-                    {/* <p className='opacity-75'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo dicta aliquam, quam laboriosam placeat quibusdam ipsum eum alias eaque temporibus ullam, debitis facilis tempore exercitationem aliquid officiis quidem quis ea.</p> */}
-                    <img src={candidate.cv} />
+                    <div className='flex flex-row items-center gap-5'>
+                        <h2 className='text-xl font-semibold mb-1'>Resume / CV</h2>
+                        <a className=' rounded p-1 bg-[#2d2d2d] cursor-pointer' href={candidate.cv} download="name.pdf"><BiDownload size={23} color={"#fff"} /></a>
+                    </div>
+                    {/* <iframe src={candidate.cv} className='w-full h-full' /> */}
                 </div>
                 <div className='border rounded-lg p-7 w-1/4 flex flex-col gap-3'>
                     <div className='text-center flex flex-col gap-1'>
