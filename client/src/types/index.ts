@@ -177,4 +177,26 @@ type Candidate = {
     id: string
 }
 
-export type { User, Post, Comment, Recommendation, Conversation, Message, Employer, Employee, SupportTicket, Job, CompanyInfo, JobDetail, Candidate };
+type EducationInfo = {
+    school: string,
+    degree: string,
+    endYear: string,
+    grade: string,
+    isCurrent: boolean,
+    startYear: string,
+    _id: string,
+    description: string,
+    fieldOfStudy: string
+}
+
+type WorkExperience = {
+    company: string,
+    endYear: string,
+    isCurrent: boolean,
+    startYear: string,
+    _id: string,
+    description: string,
+    position: string,
+}
+
+export type { User, Post, Comment, Recommendation, Conversation, Message, Employer, Employee, SupportTicket, Job, CompanyInfo, JobDetail, Candidate, EducationInfo, WorkExperience };

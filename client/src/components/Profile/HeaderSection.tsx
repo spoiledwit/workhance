@@ -103,7 +103,7 @@ const HeaderSection = ({
             </>
           ) : (
             <div
-              className="hover:bg-gray-200 cursor-pointer ml-[-10px] p-2 rounded-full"
+              className="hover:bg-gray-200 cursor-pointer ml-[-10px] p-2 rounded-full transition-all"
               onClick={() => setEdit(true)}
             >
               <MdOutlineEdit className="text-xl" />
