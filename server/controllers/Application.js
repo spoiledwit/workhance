@@ -67,6 +67,7 @@ export const getAllMyCandidates = async (req, res) => {
         status: application.status,
         cv: application.cv,
         id: application._id,
+        createdAt: application.createdAt
       };
     });
     res.status(200).json(formattedApplications);
@@ -76,7 +77,7 @@ export const getAllMyCandidates = async (req, res) => {
   }
 };
 
-export const deleteApplication  = async (req, res) => {
+export const deleteApplication = async (req, res) => {
   try {
     const userId = req.userId;
     const employer = await EmployerModel.findOne({ userId });

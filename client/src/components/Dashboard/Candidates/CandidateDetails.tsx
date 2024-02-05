@@ -2,6 +2,7 @@ import { Candidate } from '@/types';
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { format } from "timeago.js";
 
 type CandidateData = {
     state?: Candidate
@@ -81,8 +82,8 @@ const CandidateDetails = () => {
                             <p className='w-1/2 overflow-hidden'>{candidate.job.advertisingLocation}</p>
                         </div>
                         <div className='flex flex-row opacity-75'>
-                            <p className='w-1/2 font-semibold'>Posted on</p>
-                            <p className='w-1/2'>{candidate.job.createdAt}</p>
+                            <p className='w-1/2 font-semibold'>Posted</p>
+                            <p className='w-1/2'>{format(candidate.job.createdAt)}</p>
                         </div>
                         <div className='flex flex-row opacity-75'>
                             <p className='w-1/2 font-semibold'>Email Updates</p>

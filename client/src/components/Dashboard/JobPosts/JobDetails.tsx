@@ -1,8 +1,9 @@
 import { JobDetail } from '@/types';
 import React, { useEffect } from 'react'
-import { redirect, useLocation, useNavigate } from 'react-router-dom';
-import { count, capitalizeFirstLetter } from '@/lib/utils';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { capitalizeFirstLetter } from '@/lib/utils';
 import axios from 'axios';
+import { format } from 'timeago.js';
 
 const JobDetails = () => {
 
@@ -11,7 +12,7 @@ const JobDetails = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(job);
+        // console.log(job);
     }
         , [location]);
 
@@ -42,11 +43,11 @@ const JobDetails = () => {
                     <div className='flex flex-row mt-5 gap-3'>
                         <div className='border text-center p-5 rounded w-1/2'>
                             <h3 className='text-xl'>Applications</h3>
-                            <p className='font-semibold text-xl'>{5}</p>
+                            <p className='font-semibold text-xl'>{job.applications?.length}</p>
                         </div>
                         <div className='border text-center p-5 rounded w-1/2'>
                             <h3 className='text-xl'>Status</h3>
-                            <p className='font-semibold text-xl'>{job.status}</p>
+                            <p className='font-semibold text-xl'>{capitalizeFirstLetter(job.status)}</p>
                         </div>
                     </div>
                     <hr className='my-3' />
@@ -79,8 +80,8 @@ const JobDetails = () => {
                             <p className='w-1/2 overflow-hidden'>{job.advertisingLocation}</p>
                         </div>
                         <div className='flex flex-row opacity-75'>
-                            <p className='w-1/2 font-semibold'>Posted on</p>
-                            <p className='w-1/2'>{job.createdAt}</p>
+                            <p className='w-1/2 font-semibold'>Posted</p>
+                            <p className='w-1/2'>{format(job.createdAt)}</p>
                         </div>
                         <div className='flex flex-row opacity-75'>
                             <p className='w-1/2 font-semibold'>Email Updates</p>

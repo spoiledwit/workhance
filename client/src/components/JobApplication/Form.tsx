@@ -13,6 +13,8 @@ const Form = ({ job }: { job: any }) => {
   const [pdfMetaData, setpdfMetaData] = useState<any>(null);
   const [pdfs, setPdfs] = useState<string[]>([]);
 
+  console.log(job);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
@@ -33,10 +35,10 @@ const Form = ({ job }: { job: any }) => {
           applicantId: user?._id,
           cv: pdfs[0],
         }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
       );
       console.log(res);
       toast({
@@ -93,10 +95,12 @@ const Form = ({ job }: { job: any }) => {
           Terms & Conditions
         </a>
       </p>
-      <Button 
-      onClick={handleSubmit}
-      className="mt-2 h-10 w-full">
-        {loading ? "Loading..." : "Submit"}
+      <Button
+        onClick={handleSubmit}
+        disabled={user?.employerId == job.employerId._id ? true : false}
+        className="mt-2 h-10 w-full">
+        {loading ? "Loading..." : user?.employerId == job.employerId._id ? "Unable To Apply" : "Submit"}
+
       </Button>
     </div>
   );

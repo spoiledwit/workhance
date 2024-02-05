@@ -13,6 +13,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { format } from 'timeago.js'
 
 
 
@@ -52,6 +53,7 @@ const Jobposts = () => {
                         <TableHead>Description</TableHead>
                         <TableHead className="pl-7">Type</TableHead>
                         <TableHead className="">Salary</TableHead>
+                        <TableHead className="">Time Created</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -67,6 +69,9 @@ const Jobposts = () => {
                             </TableCell>
                             <TableCell className="">
                                 {job.salary.min} - {job.salary.max} (AED)
+                            </TableCell>
+                            <TableCell className="max-w-[500px] text-nowrap overflow-clip ">
+                                {format(job.createdAt)}
                             </TableCell>
                             {/* @ts-ignore */}
                             <TableCell className="text-right">

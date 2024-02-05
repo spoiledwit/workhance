@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { format } from "timeago.js";
 
 const Candidates = () => {
 
@@ -19,7 +20,7 @@ const Candidates = () => {
 
     useEffect(() => {
         handleFetchMyCandidates();
-    })
+    }, [candidates])
 
     const handleFetchMyCandidates = async () => {
         try {
@@ -43,12 +44,13 @@ const Candidates = () => {
                 <h1 className="text-xl font-semibold">Applicants</h1>
             </div>
             <Table className="mt-5">
-                {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+                <TableCaption>A list of all the candidates that applied to your job posts</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[200px]">Applicant</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Bio</TableHead>
+                        <TableHead>Time Applied</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -60,6 +62,7 @@ const Candidates = () => {
                             </TableCell>
                             <TableCell>{app?.applicant.email}</TableCell>
                             <TableCell className="max-w-[600px] text-nowrap overflow-clip">{app?.applicant.bio}</TableCell>
+                            <TableCell className="max-w-[600px] text-nowrap overflow-clip">{format(app?.createdAt)}</TableCell>
                             <TableCell className="text-right ">
                                 {/* <TableCell className="text-right"><Link to={{ pathname: '/dashboard/job-details', state: job } as JobState}><button className="bg-[#2d2d2d] text-white px-3 py-1 rounded hover:bg-[#1a1a1a] transition-all">View</button></Link></TableCell> */}
                                 <button
