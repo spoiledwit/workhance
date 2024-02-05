@@ -2,7 +2,7 @@ import { WorkExperience } from "@/types";
 import { useState } from "react";
 import { BiTrashAlt } from "react-icons/bi";
 import { MdOutlineEdit } from "react-icons/md";
-// import DeleteEducation from "./DeleteEducation";
+import DeleteWorkExperience from "./DeleteWorkExperience";
 
 const Experiences = ({ data, setOpen, userId }: { data: WorkExperience, setOpen: any, userId: string }) => {
 
@@ -11,7 +11,7 @@ const Experiences = ({ data, setOpen, userId }: { data: WorkExperience, setOpen:
   return (
     <>
       {
-        // openDelete && <DeleteEducation open={true} setOpen={setOpenDelete} userId={userId} data={data} />
+        openDelete && <DeleteWorkExperience open={true} setOpen={setOpenDelete} data={data} />
       }
 
       <div className="flex flex-row gap-20 items-center">
@@ -26,7 +26,6 @@ const Experiences = ({ data, setOpen, userId }: { data: WorkExperience, setOpen:
         </div>
       </div >
       <p className="opacity-80 font-semibold">{data.position}</p>
-      {/* <p className="opacity-80 text font-semibold">Grade: {data.}</p> */}
       <p className="opacity-90 mt-2">{data.description}</p>
     </>
   )

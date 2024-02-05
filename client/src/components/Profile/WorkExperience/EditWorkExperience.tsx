@@ -8,50 +8,45 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { EducationInfo } from "@/types";
+import { WorkExperience } from "@/types";
 import axios from "axios";
-import { useState } from "react";
+import {  useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "../../ui/use-toast";
 
-const EditEducation = ({
+const EditWorkExperience = ({
     open,
     setOpen,
     userId,
-    oldName,
-    oldBio,
-    education
+    work
 }: {
     open: boolean;
     setOpen: any;
     userId: string;
-    oldName: string;
-    oldBio?: string;
-    education?: EducationInfo;
+    work?: WorkExperience;
 }) => {
-    const [school, setSchool] = useState<string>(education?.school ? education.school : "");
-    const [description, setDescription] = useState<string>(education?.description ? education.description : "");
-    const [grade, setGrade] = useState<string>(education?.grade ? education.grade : "");
-    const [degree, setDegree] = useState<string>(education?.degree ? education.degree : "");
-    const [startYear, setStartYear] = useState<string>(education?.startYear ? education.startYear : "");
-    const [endYear, setEndYear] = useState<string>(education?.endYear ? education.endYear : "");
-    const [isCurrent, setIsCurrent] = useState<boolean>(education?.isCurrent ? education.isCurrent : false);
+    const [company, setCompany] = useState<string>(work?.company ? work.company : "");
+    const [description, setDescription] = useState<string>(work?.description ? work.description : "");
+    const [position, setPosition] = useState<string>(work?.position ? work?.position : "");
+    const [startYear, setStartYear] = useState<string>(work?.startYear ? work.startYear : "");
+    const [endYear, setEndYear] = useState<string>(work?.endYear ? work.endYear : "");
+    const [isCurrent, setIsCurrent] = useState<boolean>(work?.isCurrent ? work.isCurrent : false);
     const [loading, setLoading] = useState<boolean>(false);
     const { toast } = useToast();
 
 
-    const handleUpdateEducation = async () => {
+
+    const handleUpdateWorkExperience = async () => {
         try {
             setLoading(true);
             await axios.put(
-                `${import.meta.env.VITE_BASE_URI}/auth/education/update/${education?._id}`,
+                `${import.meta.env.VITE_BASE_URI}/auth/work/update/${work?._id}`,
                 {
-                    degree,
+                    position,
                     description,
                     startYear,
                     endYear,
-                    school,
-                    grade,
+                    company,
                     isCurrent,
                     userId: userId,
                 },
@@ -67,7 +62,7 @@ const EditEducation = ({
 
             toast({
                 title: "Success",
-                description: "Your application has been submitted successfully",
+                description: "Your experience has been updated successfully",
                 variant: "default",
             });
             setOpen(false);
@@ -88,27 +83,21 @@ const EditEducation = ({
                 <div className="flex gap-3 items-center flex-col">
                     <Input
                         type="text"
-                        placeholder="School"
-                        value={school}
-                        onChange={(e) => setSchool(e.target.value)}
+                        placeholder="Company"
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
                     />
                     <Input
                         type="text"
-                        placeholder="Degree"
-                        value={degree}
-                        onChange={(e) => setDegree(e.target.value)}
+                        placeholder="Position"
+                        value={position}
+                        onChange={(e) => setPosition(e.target.value)}
                     />
                     <Input
                         type="text"
                         placeholder="Description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Grade"
-                        value={grade}
-                        onChange={(e) => setGrade(e.target.value)}
                     />
                     <div className="flex flex-row w-full justify-between gap-2">
                         <Input
@@ -131,7 +120,7 @@ const EditEducation = ({
                             htmlFor="terms"
                             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                            Still enrolled
+                            Presently working
                         </label>
                     </div>
                 </div>
@@ -139,7 +128,7 @@ const EditEducation = ({
                     <Button
                         variant="default"
                         onClick={() => {
-                            handleUpdateEducation();
+                            handleUpdateWorkExperience();
                         }}
                         disabled={loading}
                     >
@@ -159,4 +148,4 @@ const EditEducation = ({
     );
 };
 
-export default EditEducation;
+export default EditWorkExperience;

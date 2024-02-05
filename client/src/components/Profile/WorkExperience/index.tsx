@@ -3,16 +3,30 @@ import AddWork from "./AddWork";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Experiences from "./Experiences";
+import { WorkExperience } from "@/types";
+import EditWorkExperience from "./EditworkExperience";
 
 const Work = ({ userId }: { userId: string }) => {
   const { user } = useAuthStore();
   const [open, setOpen] = useState<boolean>(false);
   const [edit, setEdit] = useState(false);
+  const [editData, setEditData] = useState<WorkExperience>()
 
-  console.log(user);
-  
+  function handleOpenModal(data: WorkExperience) {
+    setEdit(true);
+    setEditData(data);
+  }
+
   return (
     <>
+      {edit && (
+        <EditWorkExperience
+          open={edit}
+          work={editData}
+          setOpen={setEdit}
+          userId={userId ? userId : ""}
+        />
+      )}
       {!user?.workExperiences?.length && (
         <div className="flex flex-col items-center  mt-20 h-full w-full text-gray-500 text-2xl">
           <div className="flex flex-col items-center justify-center gap-3">
@@ -30,9 +44,9 @@ const Work = ({ userId }: { userId: string }) => {
       < div className="mt-10 ml-6">
         {
           user?.workExperiences?.length ?
-            user.workExperiences.map((edu: any) => (
+            user.workExperiences.map((work: any) => (
               <>
-                <Experiences data={edu} userId={userId} setOpen={setEdit} />
+                <Experiences data={work} userId={userId} setOpen={() => handleOpenModal(work)} />
               </>
             ))
             :

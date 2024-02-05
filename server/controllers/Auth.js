@@ -199,12 +199,61 @@ export const addEducation = async (req, res) => {
   }
 };
 
+export const updateEducation = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { educationId } = req.params;
+    const { degree, school, isCurrent, description, startYear, endYear, grade } = req.body;
+    const user = await AuthModel.findById(userId);
+    const eduIndex = user.educations.findIndex(edu => edu._id.toString() == educationId);
+
+    user.educations[eduIndex] = {
+      school,
+      grade,
+      description,
+      startYear,
+      endYear,
+      degree,
+      isCurrent
+    };
+
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const addWorkExperience = async (req, res) => {
   try {
     const userId = req.userId;
     const { values: workExperience } = req.body;
     const user = await AuthModel.findById(userId);
     user.workExperiences.push(workExperience);
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const updateWorkExperience = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { workExperienceId } = req.params;
+    const { company, position, startYear, endYear, isCurrent, description } = req.body;
+    const user = await AuthModel.findById(userId);
+    const workIndex = user.workExperiences.findIndex((work) => work._id.toString() == workExperienceId);
+
+    user.workExperiences[workIndex] = {
+      company,
+      position,
+      description,
+      startYear,
+      endYear,
+      isCurrent
+    }
+
     await user.save();
     res.status(200).json(user);
   } catch (error) {

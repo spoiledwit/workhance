@@ -3,7 +3,6 @@ import AddEducation from "./AddEducation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EducationInfo } from "@/types";
-import { MdOutlineEdit } from "react-icons/md";
 import Educations from "./Educations";
 import EditEducation from "./EditEducation";
 
@@ -11,7 +10,12 @@ const Education = ({ userId }: { userId: string }) => {
   const { user } = useAuthStore();
   const [edit, setEdit] = useState(false);
   const [open, setOpen] = useState<boolean>(false);
+  const [editData, setEditData] = useState<EducationInfo>()
 
+  function handleOpenModal(data: EducationInfo) {
+    setEdit(true);
+    setEditData(data);
+  }
 
   return (
     <>
@@ -20,7 +24,7 @@ const Education = ({ userId }: { userId: string }) => {
           open={edit}
           oldName={"hello"}
           oldBio={"ok"}
-          // profilePicture={}
+          education={editData}
           setOpen={setEdit}
           userId={userId ? userId : ""}
         />
@@ -40,12 +44,12 @@ const Education = ({ userId }: { userId: string }) => {
         </div>
       )}
 
-      < div className="mt-10 ml-6">
+      < div className="mt-1 ml-6">
         {
           user?.educations?.length ?
             user.educations.map((edu: EducationInfo) => (
               <>
-                <Educations data={edu} userId={userId} setOpen={setEdit} />
+                <Educations data={edu} userId={userId} setOpen={handleOpenModal} />
               </>
             ))
             :
