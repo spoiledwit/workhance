@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Experiences from "./Experiences";
 import { WorkExperience } from "@/types";
-import EditWorkExperience from "./EditworkExperience";
+import EditWorkExperience from "./EditWorkExperience";
 
 const Work = ({ userId }: { userId: string }) => {
   const { user } = useAuthStore();
