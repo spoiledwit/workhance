@@ -39,7 +39,7 @@ const Profile = () => {
     <div className="px-32 flex min-h-screen">
       <LeftSideBar />
       {user && (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <HeaderSection
             //@ts-ignore
             userId={user._id}
