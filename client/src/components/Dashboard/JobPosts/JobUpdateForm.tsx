@@ -47,12 +47,12 @@ const JobUpdateForm = () => {
 
     const job: JobDetail = location.state;
 
-
     useEffect(() => {
         form.setValue("advertisingLocation", region);
-        console.log(job);
-        form.setValue('salary.min', job.salary?.min);
-        form.setValue('salary.max', job.salary?.max);
+        //@ts-ignore
+        setRegion(job.advertisingLocation);
+        form.setValue('salary.min', job.salary?.min?.toString());
+        form.setValue('salary.max', job.salary?.max?.toString());
         form.setValue('jobTitle', job.jobTitle);
         form.setValue('jobDescription', job.jobDescription);
         form.setValue('jobType', job.jobType);
@@ -63,7 +63,11 @@ const JobUpdateForm = () => {
         form.setValue('companyWebsite', job.companyInfo.website);
         form.setValue('updatesEmail', job.updatesEmail);
         form.setValue('requireCv', job.requireCv);
+    }, []);
 
+
+    useEffect(() => {
+        form.setValue("advertisingLocation", region);
     }, [region]);
 
     const [loading, setLoading] = useState(false);
@@ -116,6 +120,7 @@ const JobUpdateForm = () => {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="flex flex-col items-center mt-5 w-full h-full">
@@ -210,6 +215,7 @@ const JobUpdateForm = () => {
                                                 placeholder="Enter a location"
                                                 region={region}
                                                 selectRegion={setRegion}
+                                                initialValue={job.advertisingLocation}
                                             />
                                         </FormControl>
                                         <FormDescription>
