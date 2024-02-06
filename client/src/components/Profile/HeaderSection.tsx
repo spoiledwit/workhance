@@ -7,6 +7,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useToast } from "../ui/use-toast";
 import VerificationRequest from "./Verification/VerificationRequest";
+import { BiCheck, BiTimeFive } from "react-icons/bi";
+import { RxCross2 } from "react-icons/rx";
 
 interface Props {
   name: string;
@@ -125,9 +127,31 @@ const HeaderSection = ({
         <div className="mt-2">
           <span className="text-gray-500">{followers.length} followers</span>
         </div>
-        <div className="rounded border w-fit px-2 py-1 mt-2 hover:text-white hover:bg-[#2d2d2d] hover:border-[#2d2d2d] cursor-pointer transition-all text-gray-600 border-gray-500" onClick={() => setVerify(true)}>
+        {
+          verificationStatus == "Verified" &&
+          <div className="flex flex-row items-center justify-between gap-1 rounded border w-fit px-3  mt-2 transition-all text-green-700 border-green-700">
+            Verified
+            <BiCheck size={20} />
+          </div>
+        }
+        {
+          verificationStatus == "Pending" &&
+          <div className="flex flex-row gap-2 items-center rounded border w-fit px-3  mt-2 transition-all text-yellow-600 border-yellow-600">
+            Pending
+            <BiTimeFive size={17} />
+
+          </div>
+        }
+        {
+          verificationStatus == "Not Verified" &&
+          <div className="flex flex-row items-center gap-1 rounded border w-fit px-2 mt-2 hover:text-white hover:bg-[#2d2d2d] hover:border-[#2d2d2d] cursor-pointer transition-all text-gray-600 border-gray-500" onClick={() => setVerify(true)}>
+            Not Verified
+            <RxCross2 size={20} />
+          </div>
+        }
+        {/* <div className="rounded border w-fit px-2 py-1 mt-2 hover:text-white hover:bg-[#2d2d2d] hover:border-[#2d2d2d] cursor-pointer transition-all text-gray-600 border-gray-500" onClick={() => setVerify(true)}>
           {verificationStatus ? verificationStatus !== "Pending" ? verificationStatus : "Verification Pending" : "Not Verified"}
-        </div>
+        </div> */}
       </span>
       <span className="flex min-w-[200px] items-center justify-center">
         {profilePicture ? (
