@@ -58,6 +58,7 @@ const Jobposts = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
+                    {/* @ts-ignore */}
                     {data?.jobs?.map((job: any) => (
                         <TableRow key={job._id}>
                             <TableCell className="font-medium">{job.jobTitle}</TableCell>

@@ -1,12 +1,5 @@
-import { MdSpaceDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { FaUserFriends } from "react-icons/fa";
-import { RxDashboard } from "react-icons/rx";
-import { useLocation } from "react-router-dom";
-import { IoLogOut } from "react-icons/io5";
-import { logout } from "@/hooks/auth";
-import { Button } from "../ui/button";
-import { BiBriefcase, BiMenu, BiSolidGroup, BiFolder, BiSolidUserCheck } from "react-icons/bi";
+import { BiBriefcase, BiMenu, BiSolidGroup, BiSolidUserCheck } from "react-icons/bi";
 
 const SideBar = () => {
 

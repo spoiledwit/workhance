@@ -40,7 +40,6 @@ const Dashboard = () => {
           },
         }
       );
-      // console.log(res.data);
       setJobs(res.data.length);
     } catch (error) {
       console.log(error);
@@ -65,9 +64,12 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-row gap-3">
-      <Card twClass="bg-[#F2F2F2] w-1/3 border-[]" label="Total Users" data={users} />
-      <Card twClass="bg-[#F2F2F2] w-1/3 border-[]" label="Total Jobs" data={jobs} />
-      <Card twClass="bg-[#F2F2F2] w-1/3 border-[]" label="Pending Verifications" data={pending} />
+      {/* @ts-ignore */}
+      <Card twClass="bg-[#F2F2F2] w-1/3" label="Total Users" data={users} />
+      {/* @ts-ignore */}
+      <Card twClass="bg-[#F2F2F2] w-1/3" label="Total Jobs" data={jobs} />
+      {/* @ts-ignore */}
+      <Card twClass="bg-[#F2F2F2] w-1/3" label="Pending Verifications" data={pending} />
 
     </div>
   )

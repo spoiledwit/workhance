@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = ({ bgColor, borderColor, textColor, label, data, twClass }: { bgColor: string, borderColor: string, textColor: string, label: string, data: string | number, twClass: string }) => {
+const Card = ({ borderColor, textColor, label, data, twClass }: { borderColor: string, textColor: string, label: string, data: string | number, twClass: string }) => {
     return (
         <>
             <div className={"rounded-lg border-2 h-[15rem] p-3 flex flex-col items-center justify-center " + twClass}>

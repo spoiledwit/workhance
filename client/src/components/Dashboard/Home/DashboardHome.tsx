@@ -55,8 +55,8 @@ const DashboardHome = () => {
 
       <div className='flex flex-row justify-between items-center mt-5 gap-3'>
         <div className='w-1/3 self-start flex flex-col gap-2'>
-          <Card bgColor='#b3ffe5' textColor='#156348' borderColor='#25ffb3' label='Posted Jobs' data={applicants.length} />
-          <Card bgColor='#FFC5CC' textColor='#FF495F' borderColor='#FF96A3' label="Total Applicants" data={getTotalApplicants(applicants)} />
+          <Card twClass='bg-[#F2F2F2] w-full' textColor='#156348' borderColor='#25ffb3' label='Posted Jobs' data={applicants.length} />
+          <Card twClass='bg-[#F2F2F2] w-full' textColor='#FF495F' borderColor='#FF96A3' label="Total Applicants" data={getTotalApplicants(applicants)} />
         </div>
 
         <BarChart
