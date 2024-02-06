@@ -1,4 +1,4 @@
-import { login, register, getUser, getUserById, updateMyProfile, getRecommendedUsers, followUser, unfollowUser, addEducation, addWorkExperience, deleteEducation, deleteWorkExperience, updateEducation, updateWorkExperience } from "../controllers/Auth.js";
+import { login, register, getUser, getUserById, updateMyProfile, getRecommendedUsers, followUser, unfollowUser, addEducation, addWorkExperience, deleteEducation, deleteWorkExperience, updateEducation, updateWorkExperience, getUsers, verifyUser, getPendingUsers } from "../controllers/Auth.js";
 import verifyToken from "../middlewares/verifyToken.js";
 import express from "express";
 
@@ -7,8 +7,11 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.get("/user", verifyToken, getUser);
+router.get("/users", verifyToken, getUsers);
 router.get("/user/:id", getUserById);
 router.put("/user", verifyToken, updateMyProfile);
+router.put("/verify", verifyToken, verifyUser);
+router.get("/pending-users", verifyToken, getPendingUsers);
 router.get("/users", verifyToken, getRecommendedUsers);
 router.post("/follow/:userId", verifyToken, followUser);
 router.post("/unfollow/:userId", verifyToken, unfollowUser);

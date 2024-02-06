@@ -47,6 +47,7 @@ const Profile = () => {
             name={user.name}
             profilePicture={user.profilePicture}
             bio={user.bio}
+            verificationStatus={user.verificationStatus}
           />
           <ProfileNav active={active} setActive={setActive} />
           {user && user._id && active === "posts" && (

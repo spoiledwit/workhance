@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import AuthModel from "../models/Auth.js";
 import EmployerModel from "../models/Employer.js";
 import dotenv from "dotenv";
+import { createReadStream } from "fs";
+import { error } from "console";
 dotenv.config();
 
 // Register
@@ -81,6 +83,15 @@ export const getUser = async (req, res) => {
     const user = await AuthModel.findById(req.userId);
     const employer = await EmployerModel.findById(user.employerId);
     res.status(200).json({ user, employer });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getUsers = async (req, res) => {
+  try {
+    const users = await AuthModel.find();
+    res.status(200).json(users);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -290,3 +301,30 @@ export const deleteWorkExperience = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const verifyUser = async (req, res) => {
+  try {
+    const status = ["Not Verified", "Pending", "Verified"];
+    const userId = req.userId;
+    const { verificationStatus } = req.body;
+    if (!status.includes(verificationStatus)) {
+      return res.status(404).json({ message: "A server error occurred" })
+    }
+    const user = await AuthModel.findById(userId);
+    user.verificationStatus = verificationStatus;
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message })
+  }
+}
+
+export const getPendingUsers = async (req, res) => {
+  try {
+    const users = await AuthModel.find({ verificationStatus: "Pending" });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+

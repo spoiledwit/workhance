@@ -29,6 +29,10 @@ const AuthSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    verificationStatus: {
+      type: String,
+      default: "Not Verified",
+    },
     educations: [
       {
         school: {

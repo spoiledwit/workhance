@@ -16,6 +16,7 @@ type User = {
     createdAt?: string;
     updatedAt?: string;
     hashedPassword?: string;
+    verificationStatus?: string
 };
 
 

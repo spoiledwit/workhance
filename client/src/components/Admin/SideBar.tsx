@@ -6,69 +6,40 @@ import { useLocation } from "react-router-dom";
 import { IoLogOut } from "react-icons/io5";
 import { logout } from "@/hooks/auth";
 import { Button } from "../ui/button";
+import { BiBriefcase, BiMenu, BiSolidGroup, BiFolder, BiSolidUserCheck } from "react-icons/bi";
 
 const SideBar = () => {
-  const links = [
-    {
-      title: "Dashboard",
-      slug: "/admin",
-      icon: <MdSpaceDashboard />,
-    },
-    {
-      title: "Users",
-      slug: "/admin/users",
-      icon: <FaUserFriends />,
-    },
-    {
-      title: "Products",
-      slug: "/admin/products",
-      icon: <RxDashboard />,
-    },
-    {
-      title: "Orders",
-      slug: "/admin/orders",
-      icon: <RxDashboard />,
-    },
-    {
-      title: "Categories",
-      slug: "/admin/categories",
-      icon: <RxDashboard />,
-    },
-  ];
-
-  const pathname = useLocation().pathname;
 
   return (
-    <div className="h-screen w-full border p-4 overflow-auto flex flex-col">
-      {links.map((link, index) => (
-        <div
-          key={index}
-          className={`bg-white rounded-lg md:p-4 p-2 cursor-pointer hover:bg-gray-50 transition
-          ${pathname === link.slug && "bg-gray-100"}
-          `}
-        >
-          <Link to={link.slug} className="block w-full h-full">
-            <div className="flex items-center space-x-4">
-              <div className="text-violet-800 bg-violet-200 p-2 text-xl rounded-xl font-semibold">
-                {link.icon}
-              </div>
-              <div className="text-violet-80 md:block hidden font-semibold">{link.title}</div>
-            </div>
-          </Link>
-        </div>
-      ))}
-      <Button 
-      onClick={() => logout()}
-      className="w-full bg-violet-800 hover:bg-violet-900 h-10 mt-auto mb-6 flex md:gap-2 items-center justify-center">
-        <p
-        className="md:block hidden text-white font-semibold"
-        >
-        Logout
-        </p>
-        <IoLogOut className="text-white text-xl" />
-      </Button>
-    </div>
-  );
+    <>
+      <div className='w-[60px] bg-[#2D2D2D] gap-2 h-full delay-500 hover:w-[200px] transition-all'>
+        <Link to={'/admin'}>
+          <div className='flex flex-row justify-start items-center hover:bg-[#5f5f5f] transition-all rounded p-2 m-2'>
+            <BiMenu size={25} color={"#ffffff"} />
+          </div>
+        </Link>
+
+        <Link to={'/admin/users'}>
+          <div className='flex flex-row justify-start items-center hover:bg-[#5f5f5f] transition-all rounded p-2 m-2'>
+            <BiSolidGroup size={25} color={"#ffffff"} />
+          </div>
+        </Link>
+
+        <Link to={'/admin/jobs'}>
+          <div className='flex flex-row justify-start items-center hover:bg-[#5f5f5f] transition-all rounded p-2 m-2'>
+            <BiBriefcase size={25} color={"#ffffff"} />
+
+          </div>
+        </Link>
+        <Link to={'/admin/pending-users'}>
+          <div className='flex flex-row justify-start items-center hover:bg-[#5f5f5f] transition-all rounded p-2 m-2'>
+            <BiSolidUserCheck size={25} color={"#ffffff"} />
+
+          </div>
+        </Link>
+      </div >
+    </>
+  )
 };
 
 export default SideBar;

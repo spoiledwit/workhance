@@ -6,12 +6,14 @@ import EditProfile from "./EditProfile";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "../ui/use-toast";
+import VerificationRequest from "./Verification/VerificationRequest";
 
 interface Props {
   name: string;
   bio?: string;
   profilePicture?: string;
   userId: string;
+  verificationStatus?: string;
   followers: string[];
 }
 
@@ -21,10 +23,12 @@ const HeaderSection = ({
   profilePicture,
   userId,
   followers,
+  verificationStatus
 }: Props) => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuthStore();
   const [edit, setEdit] = useState(false);
+  const [verify, setVerify] = useState(false);
   const { toast } = useToast();
 
   const handleFollow = async () => {
@@ -86,6 +90,13 @@ const HeaderSection = ({
           userId={userId ? userId : ""}
         />
       )}
+      {verify && (
+        <VerificationRequest
+          open={verify}
+          setOpen={setVerify}
+          userId={userId ? userId : ""}
+        />
+      )}
       <span>
         <span className="flex items-center gap-6">
           <h2 className="text-3xl font-bold">{name}</h2>
@@ -113,6 +124,9 @@ const HeaderSection = ({
         <p className="mt-2 text-lg">{bio ? bio : "No bio yet"}</p>
         <div className="mt-2">
           <span className="text-gray-500">{followers.length} followers</span>
+        </div>
+        <div className="rounded border w-fit px-2 py-1 mt-2 hover:text-white hover:bg-[#2d2d2d] hover:border-[#2d2d2d] cursor-pointer transition-all text-gray-600 border-gray-500" onClick={() => setVerify(true)}>
+          {verificationStatus ? verificationStatus !== "Pending" ? verificationStatus : "Verification Pending" : "Not Verified"}
         </div>
       </span>
       <span className="flex min-w-[200px] items-center justify-center">
