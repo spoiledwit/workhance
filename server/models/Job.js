@@ -77,6 +77,12 @@ const JobSchema = new mongoose.Schema(
         ref: "Application",
       },
     ],
+    shortlisted: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Application",
+      },
+    ],
     status: {
       type: String,
       default: "pending",

@@ -47,6 +47,30 @@ export const createApplication = async (req, res) => {
   }
 };
 
+export const shortlistApplication = async (req, res) => {
+  try {
+    const { applicationId, jobId } = req.body;
+    console.log("App: ", applicationId)
+    console.log("Job: ", jobId);
+    const application = await ApplicationModel.findById(applicationId);
+
+    const job = await JobModel.findById(jobId);
+
+    console.log(application);
+    application.status = "accepted";
+    await application.save();
+
+    await JobModel.findByIdAndUpdate(jobId, {
+      $push: { shortlisted: application._id },
+      $pull: { applications: application._id }
+    });
+
+    res.status(201).json({ message: "Application created successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 export const getAllMyCandidates = async (req, res) => {
   try {
     const userId = req.userId;
@@ -56,6 +80,7 @@ export const getAllMyCandidates = async (req, res) => {
     const jobsIds = employer.postedJobs;
     const allApplications = await ApplicationModel.find({
       jobId: { $in: jobsIds },
+      status: "pending"
     })
       .populate("applicantId")
       .populate("jobId");

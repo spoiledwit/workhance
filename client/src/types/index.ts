@@ -165,6 +165,7 @@ type JobDetail = {
     updatesEmail?: string,
     requireCv: boolean,
     applications?: String[],
+    shortlisted?: String[],
     status?: string,
     updatedAt: string,
     createdAt: string,

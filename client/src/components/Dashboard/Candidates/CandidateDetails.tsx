@@ -15,6 +15,26 @@ const CandidateDetails = () => {
         console.log(candidate);
     }, [candidate])
 
+    async function shortlistCandidate(applicationId: string | undefined) {
+        try {
+            await axios.put(`${import.meta.env.VITE_BASE_URI}/application/shortlist`,
+                {
+                    applicationId,
+                    jobId: candidate.job?._id
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    },
+                }).then(() => {
+                    console.log("Shortlisted applicant");
+                    navigate(-1);
+                })
+        } catch (error) {
+            console.log("Error while shortlisting applicant: ", error);
+        }
+    }
+
     async function rejectCandidate(applicationId: string | undefined) {
         try {
             await axios.delete(`${import.meta.env.VITE_BASE_URI}/application/${applicationId}`,
@@ -53,7 +73,7 @@ const CandidateDetails = () => {
                 </div>
                 <div className='border rounded-lg p-7 w-1/4 flex flex-col gap-3'>
                     <div className='text-center flex flex-col gap-1'>
-                        <button className='hover:bg-[#2d2d2d] border border-[#2d2d2d] text-[#2d2d2d] hover:border-[#1a1a1a] transition-all font-semibold hover:text-white w-full py-2 rounded '>Shortlist</button>
+                        <button onClick={() => shortlistCandidate(candidate.id)} className='hover:bg-[#2d2d2d] border border-[#2d2d2d] text-[#2d2d2d] hover:border-[#1a1a1a] transition-all font-semibold hover:text-white w-full py-2 rounded '>Shortlist</button>
                         <button onClick={() => rejectCandidate(candidate.id)} className=' text-red-500 border border-red-500 w-full py-2 rounded hover:bg-red-700 hover:border-red-700 hover:text-white font-semibold transition-all '>Reject</button>
                     </div>
                     <hr className='my-2' />
