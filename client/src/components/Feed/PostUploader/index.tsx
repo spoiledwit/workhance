@@ -11,7 +11,7 @@ const PostUploader = () => {
     <div>
       <PostUploaderDialog open={open} setOpen={setOpen} />
       <div
-        className="flex items-center gap-2 border rounded-md p-2 justify-between cursor-pointer hover:bg-gray-100 px-6"
+        className="flex items-center gap-2 border rounded-md p-2 justify-between cursor-pointer hover:bg-gray-100 px-6 mb-3"
         onClick={() => setOpen(true)}
       >
         <span className="flex items-center gap-2 px-2 py-1 rounded-md ">

@@ -92,6 +92,7 @@ const AddEducation = ({
       console.log(error);
     } finally {
       setLoading(false);
+      window.location.reload();
     }
   };
   return (

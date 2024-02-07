@@ -62,7 +62,6 @@ const AdminVerification = ({
                     </DialogDescription>
                 </DialogHeader>
                 <div className="flex gap-3 items-center flex-col">
-
                 </div>
                 <DialogFooter className="justify-start">
                     <Button

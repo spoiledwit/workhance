@@ -307,6 +307,7 @@ export const verifyUser = async (req, res) => {
     const status = ["Not Verified", "Pending", "Verified"];
     const userId = req.userId;
     const { verificationStatus } = req.body;
+    // check if the received status is correct, else send an error
     if (!status.includes(verificationStatus)) {
       return res.status(404).json({ message: "A server error occurred" })
     }

@@ -47,6 +47,7 @@ const DeleteEducation = ({
                 variant: "default",
             });
             setLoading(false);
+            window.location.reload();
         }
     };
 

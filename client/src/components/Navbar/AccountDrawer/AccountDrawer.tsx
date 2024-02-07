@@ -63,13 +63,16 @@ const AccountDrawer = () => {
               <FiUser size={17} className=" text-parimary" />
               Profile
             </Link>
-            <Link
-              to={`/dashboard`}
-              className="flex items-center gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200"
-            >
-              <BiGridAlt size={17} className=" text-parimary" />
-              Dashboard
-            </Link>
+            {
+              user?.employerId &&
+              <Link
+                to={`/dashboard`}
+                className="flex items-center gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200"
+              >
+                <BiGridAlt size={17} className=" text-parimary" />
+                Dashboard
+              </Link>
+            }
             {/* <button className="flex items-center bg-white w-full gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200">
               <RiNotification4Line size={17} className=" text-primary" />
               Notifications

@@ -40,30 +40,26 @@ const formSchema = z.object({
 });
 
 const JobUpdateForm = () => {
-    const [region, setRegion] = useState("");
+    const [region, setRegion] = useState<string>();
     const [step, setStep] = useState(1);
     const { user } = useAuthStore();
     const location = useLocation();
-
     const job: JobDetail = location.state;
 
 
     useEffect(() => {
-        form.setValue("advertisingLocation", region);
-        console.log(job);
+        setRegion(job.advertisingLocation);
         form.setValue('salary.min', job.salary?.min);
         form.setValue('salary.max', job.salary?.max);
         form.setValue('jobTitle', job.jobTitle);
         form.setValue('jobDescription', job.jobDescription);
         form.setValue('jobType', job.jobType);
-        form.setValue('advertisingLocation', job.advertisingLocation);
+        form.setValue("advertisingLocation", region);
         form.setValue('companyName', job.companyInfo.name);
         form.setValue('businessEmail', job.companyInfo.email);
         form.setValue('employeeCount', job.companyInfo.employeeCount);
         form.setValue('companyWebsite', job.companyInfo.website);
         form.setValue('updatesEmail', job.updatesEmail);
-        form.setValue('requireCv', job.requireCv);
-
     }, [region]);
 
     const [loading, setLoading] = useState(false);
@@ -180,13 +176,14 @@ const JobUpdateForm = () => {
                                             <select
                                                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                                                 {...field}
+                                            // defaultValue={job.jobType}
                                             >
-                                                <option value="full-time" selected={job.jobType == 'full-time' ? true : false}>Full Time</option>
-                                                <option value="part-time" selected={job.jobType == 'part-time' ? true : false}>Part Time</option>
-                                                <option value="contract" selected={job.jobType == 'contract' ? true : false}>Contract</option>
+                                                <option value="full-time" >Full Time</option>
+                                                <option value="part-time" >Part Time</option>
+                                                <option value="contract" >Contract</option>
                                                 <option value="internship" >Internship</option>
-                                                <option value="volunteer" selected={job.jobType == 'volunteer' ? true : false}>Volunteer</option>
-                                                <option value="temporary" selected={job.jobType == 'temporary' ? true : false}>Temporary</option>
+                                                <option value="volunteer" >Volunteer</option>
+                                                <option value="temporary" >Temporary</option>
                                             </select>
                                         </FormControl>
                                         <FormDescription>
@@ -209,6 +206,7 @@ const JobUpdateForm = () => {
                                             <Locator
                                                 placeholder="Enter a location"
                                                 region={region}
+                                                initialValue={job.advertisingLocation}
                                                 selectRegion={setRegion}
                                             />
                                         </FormControl>
@@ -393,7 +391,7 @@ const JobUpdateForm = () => {
                                     <FormItem>
                                         <FormLabel>Require CV</FormLabel>
                                         <FormControl>
-                                            <input className="ml-2" type="checkbox" {...field} />
+                                            <input className="ml-2" type="checkbox" defaultChecked={job.requireCv} {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             Do you require a CV from the applicants?

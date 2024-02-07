@@ -51,9 +51,12 @@ const RightSideBar = () => {
 
       {!loading && users.length > 0 && (
         <>
-          {users.map((user) => (
-            <UserRow key={user._id} user={user} />
-          ))}
+          {
+            users.slice(0, 5).map((user) => (
+              <UserRow key={user._id} user={user} />
+
+            ))
+          }
         </>
       )}
     </div>

@@ -53,13 +53,13 @@ export const shortlistApplication = async (req, res) => {
     console.log("App: ", applicationId)
     console.log("Job: ", jobId);
     const application = await ApplicationModel.findById(applicationId);
-
     const job = await JobModel.findById(jobId);
 
-    console.log(application);
+    // update the applicants status 
     application.status = "accepted";
     await application.save();
 
+    // remove the applicant from the applications array and append it to shortlisted array 
     await JobModel.findByIdAndUpdate(jobId, {
       $push: { shortlisted: application._id },
       $pull: { applications: application._id }

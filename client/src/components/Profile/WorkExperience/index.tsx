@@ -1,21 +1,44 @@
 import useAuthStore from "@/store/authStore";
 import AddWork from "./AddWork";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Experiences from "./Experiences";
-import { WorkExperience } from "@/types";
+import { User, WorkExperience } from "@/types";
 import EditWorkExperience from "./EditWorkExperience";
+import axios from "axios";
 
 const Work = ({ userId }: { userId: string }) => {
   const { user } = useAuthStore();
   const [open, setOpen] = useState<boolean>(false);
   const [edit, setEdit] = useState(false);
   const [editData, setEditData] = useState<WorkExperience>()
+  const [profile, setProfile] = useState<User>();
+
+  useEffect(() => {
+    handleGetUser();
+  })
+
 
   function handleOpenModal(data: WorkExperience) {
     setEdit(true);
     setEditData(data);
   }
+
+  const handleGetUser = async () => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_BASE_URI}/auth/user/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setProfile(res.data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -27,7 +50,7 @@ const Work = ({ userId }: { userId: string }) => {
           userId={userId ? userId : ""}
         />
       )}
-      {!user?.workExperiences?.length && (
+      {!profile?.workExperiences?.length && (
         <div className="flex flex-col items-center  mt-20 h-full w-full text-gray-500 text-2xl">
           <div className="flex flex-col items-center justify-center gap-3">
             <h1 className="text-4xl font-bold">No Work</h1>
@@ -43,8 +66,8 @@ const Work = ({ userId }: { userId: string }) => {
       }
       < div className="mt-10 ml-6">
         {
-          user?.workExperiences?.length ?
-            user.workExperiences.map((work: any) => (
+          profile?.workExperiences?.length ?
+            profile?.workExperiences.map((work: any) => (
               <>
                 <Experiences data={work} userId={userId} setOpen={() => handleOpenModal(work)} />
               </>
