@@ -62,7 +62,7 @@ const Navbar = () => {
             />
           )}
           {user && (
-            <div className="flex items-center gap-3 ">
+            <div className="flex items-center xl:gap-3 md:gap-3 lg:gap-3 gap-1">
               <SearchBar />
               <Link to={"/post-job"}
                 className="text-gray-600 font-medium hover:text-primary hover:underline xl:block lg:block md:block hidden"
