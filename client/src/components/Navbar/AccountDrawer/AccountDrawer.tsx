@@ -64,6 +64,16 @@ const AccountDrawer = () => {
               Profile
             </Link>
             {
+              user?.isAdmin &&
+              <Link
+                to={`/admin`}
+                className="flex items-center gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200"
+              >
+                <BiGridAlt size={17} className=" text-parimary" />
+                Admin Dashboard
+              </Link>
+            }
+            {
               user?.employerId &&
               <Link
                 to={`/dashboard`}

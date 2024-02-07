@@ -16,7 +16,8 @@ type User = {
     createdAt?: string;
     updatedAt?: string;
     hashedPassword?: string;
-    verificationStatus?: string
+    verificationStatus?: string;
+    isAdmin?: boolean;
 };
 
 
