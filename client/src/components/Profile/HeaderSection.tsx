@@ -82,7 +82,7 @@ const HeaderSection = ({
   };
 
   return (
-    <div className="bg-gray-100 w-full justify-between flex p-10 max-h-[230px]">
+    <div className="bg-gray-100 w-full justify-between border flex p-10 xl:max-h-[230px]">
       {edit && (
         <EditProfile
           open={edit}
@@ -100,9 +100,9 @@ const HeaderSection = ({
           userId={userId ? userId : ""}
         />
       )}
-      <span>
+      <span className="">
         <span className="flex items-center gap-6">
-          <h2 className="text-3xl font-bold">{name}</h2>
+          <h2 className="text-xl lg:text-3xl md:text-3xl xl:text-3xl font-bold ">{name}</h2>
           {!(userId === user?._id) ? (
             <>
               {followers.includes(user?._id!) ? (
@@ -124,7 +124,7 @@ const HeaderSection = ({
             </div>
           )}
         </span>
-        <p className="mt-2 text-lg">{bio ? bio : "No bio yet"}</p>
+        <p className="mt-2 text-md xl:text-lg">{bio ? bio : "No bio yet"}</p>
         <div className="mt-2">
           <span className="text-gray-500">{followers.length} followers</span>
         </div>
@@ -141,12 +141,12 @@ const HeaderSection = ({
           {verificationStatus ? verificationStatus !== "Pending" ? verificationStatus : "Verification Pending" : "Not Verified"}
         </div> */}
       </span>
-      <span className="flex min-w-[200px] items-center justify-center">
+      <span className="flex min-w-[100px] xl:min-w-[200px] items-center justify-center">
         {profilePicture ? (
           <img
             src={profilePicture}
             alt="profile"
-            className="rounded-full h-40 w-40 object-cover"
+            className="rounded-full w-20 h-20 xl:h-40 xl:w-40 object-cover"
           />
         ) : (
           <FaUserCircle size={140} className=" text-gray-500" />

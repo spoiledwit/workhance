@@ -32,14 +32,14 @@ const ProfilePosts = ({ userId }: { userId: string }) => {
 
   return (
     <div
-    className={`max-w-2xl ${posts.length > 0 ? "mr-auto" : "mt-10 ml-10" }`}
+      className={`max-w-2xl xl:px-0 px-2 flex flex-col gap-2 mt-2  ${posts.length > 0 ? "mr-auto" : "mt-10 ml-10"}`}
     >
       {loading && <div className="text-center">Loading...</div>}
       {!loading && posts.length === 0 && (
         <div
-        className="flex flex-col items-center  mt-10 ml-20 h-full w-full text-gray-500 text-2xl"
+          className="flex flex-col items-center  mt-10 ml-20 h-full w-full text-gray-500 text-2xl"
         >
-            No Posts yet
+          No Posts yet
         </div>
       )}
       {posts.map((post) => (

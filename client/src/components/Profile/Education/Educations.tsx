@@ -25,7 +25,7 @@ const Educations = ({ data, setOpen, userId }: { data: EducationInfo, setOpen: a
       }
 
       <div className="flex flex-row gap-20 items-center">
-        <h1 className="font-semibold text-lg">{data.school}<span className="font-normal text-sm opacity-70 ml-2">({data.startYear} - {data.endYear})</span></h1>
+        <h1 className="font-semibold text-lg">{data.school}<span className="font-normal text-sm opacity-70 ml-2 text-nowrap">({data.startYear} - {data.endYear})</span></h1>
         <div className="flex flex-row gap-5">
           <div className="hover:bg-gray-200 cursor-pointer ml-[-10px] transition-all p-2 rounded-full" title="Edit" onClick={() => setOpen(data)}>
             <MdOutlineEdit size={22} opacity={0.7} className={isCurrentUser() ? "" : "hidden"} />

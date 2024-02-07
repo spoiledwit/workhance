@@ -36,7 +36,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="px-32 flex min-h-screen">
+    <div className="md:px-32 lg:px-32 xl:px-32 flex min-h-screen border">
       <LeftSideBar />
       {user && (
         <div className="flex flex-col w-full">
@@ -60,8 +60,9 @@ const Profile = () => {
             <WorkExperience userId={user._id} />
           )}
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

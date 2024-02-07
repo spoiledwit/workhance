@@ -4,7 +4,7 @@ import { FiUser, FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
 import { logout } from "@/hooks/auth";
-import { BiBriefcase, BiGridAlt } from "react-icons/bi";
+import { BiBookAdd, BiBriefcase, BiGridAlt } from "react-icons/bi";
 
 const AccountDrawer = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -79,8 +79,18 @@ const AccountDrawer = () => {
                 to={`/post-job`}
                 className="flex flex-row items-center gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200 xl:hidden lg:hidden md:hidden"
               >
-                <BiBriefcase size={17} className=" text-parimary" />
+                <BiBookAdd size={17} className=" text-parimary" />
                 Post a Job
+              </Link>
+            }
+            {
+              user?.employerId &&
+              <Link
+                to={`/jobs`}
+                className="flex flex-row items-center gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200 xl:hidden lg:hidden md:hidden"
+              >
+                <BiBriefcase size={17} className=" text-parimary" />
+                My Jobs
               </Link>
             }
             {/* <button className="flex items-center bg-white w-full gap-2 px-3 text-sm py-2 rounded-lg hover:bg-gray-200">

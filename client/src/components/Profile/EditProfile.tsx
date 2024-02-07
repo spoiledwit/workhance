@@ -34,9 +34,9 @@ const EditProfile = ({
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (profilePicture) {
-        setImages([profilePicture]);
+      setImages([profilePicture]);
     }
   }, [])
 
@@ -65,7 +65,7 @@ const EditProfile = ({
   };
   return (
     <Dialog onOpenChange={(open) => setOpen(open)} open={open}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="xl:max-w-md lg:max-md md:max-w-md sm:max-w-md max-w-sm rounded">
         <DialogHeader>
           <DialogTitle>Edit your Workhance Profile</DialogTitle>
           <DialogDescription>

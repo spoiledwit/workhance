@@ -6,7 +6,7 @@ import { GrShare } from "react-icons/gr";
 import axios from "axios";
 import { useState } from "react";
 
-const Reactor = ({ post, setOpen, open }: { post: Post; setOpen: any, open:any }) => {
+const Reactor = ({ post, setOpen, open }: { post: Post; setOpen: any, open: any }) => {
   const { user } = useAuthStore();
   const [likes, setLikes] = useState(post.likes);
 
@@ -66,14 +66,12 @@ const Reactor = ({ post, setOpen, open }: { post: Post; setOpen: any, open:any }
           style={{
             transform: "rotateY(180deg)",
           }}
-          className={`cursor-pointer ${
-            likes?.find((like) => like === user?._id) && "text-blue-500"
-          }`}
+          className={`cursor-pointer ${likes?.find((like) => like === user?._id) && "text-blue-500"
+            }`}
         />
         <p
-          className={`text-[16px] font-medium cursor-pointer ${
-            likes?.find((like) => like === user?._id) && "text-blue-500"
-          }`}
+          className={`text-[15px] md:text-[16px] lg:text-[16px] xl:text-[16px] font-medium cursor-pointer ${likes?.find((like) => like === user?._id) && "text-blue-500"
+            }`}
         >
           Like
         </p>
@@ -84,11 +82,11 @@ const Reactor = ({ post, setOpen, open }: { post: Post; setOpen: any, open:any }
       >
         <p className="text-lg">{post.comments?.length}</p>
         <MdOutlineInsertComment />
-        <p className="text-[16px] font-medium cursor-pointer">Comment</p>
+        <p className="text-[15px] md:text-[16px] lg:text-[16px] xl:text-[16px] font-medium cursor-pointer">Comment</p>
       </div>
       <div className="flex items-center text-lg gap-2 text-gray-700 py-3">
         <GrShare />
-        <p className="text-[16px] font-medium cursor-pointer">Send</p>
+        <p className="text-[15px] md:text-[16px] lg:text-[16px] xl:text-[16px] font-medium cursor-pointer">Send</p>
       </div>
     </div>
   );
