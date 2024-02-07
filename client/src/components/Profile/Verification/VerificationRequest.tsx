@@ -53,7 +53,7 @@ const VerificationRequest = ({
 
     return (
         <Dialog onOpenChange={(open) => setOpen(open)} open={open}>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md xl:max-w-md lg:max-w-md md:max-w-md max-w-xs rounded">
                 <DialogHeader>
                     <DialogTitle>Request Verification</DialogTitle>
                     <DialogDescription>
@@ -63,7 +63,7 @@ const VerificationRequest = ({
                 <div className="flex gap-3 items-center flex-col">
 
                 </div>
-                <DialogFooter className="justify-start">
+                <DialogFooter className="justify-start flex flex-col gap-2">
                     <Button
                         variant="default"
                         className="bg-[#2d2d2d] hover:bg-slate-950"

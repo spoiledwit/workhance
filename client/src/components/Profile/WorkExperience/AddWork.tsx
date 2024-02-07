@@ -86,7 +86,7 @@ const AddWork = ({
   };
   return (
     <Dialog onOpenChange={(open) => setOpen(open)} open={open}>
-      <DialogContent className="max-h-[600px] overflow-y-auto">
+      <DialogContent className="max-h-[600px] xl:max-w-lg md:max-w-lg lg:max-w-lg sm:max-w-[400px] max-w-[350px] overflow-y-auto rounded">
         <DialogHeader>
           <DialogTitle>Add Work</DialogTitle>
           <DialogDescription>
