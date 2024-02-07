@@ -100,7 +100,7 @@ const PostJobForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-3 w-full max-w-[700px]"
+          className="space-y-3 w-full xl:max-w-[700px] lg:max-w-[700px] md:max-w-[700px] max-w-[900px]"
         >
           {step === 1 && (
             <>
@@ -399,8 +399,8 @@ const PostJobForm = () => {
             </div>
           )}
         </form>
-      </Form>
-    </div>
+      </Form >
+    </div >
   );
 };
 

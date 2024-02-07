@@ -28,13 +28,13 @@ const Navbar = () => {
   };
   return (
     <header className={`bg-white shadow z-50`}>
-      <nav className={`flex items-center justify-between py-1 px-32`}>
+      <nav className={`flex flex-row items-center justify-between px-10 py-1 xl:px-32 `}>
         <Link
           to={"/"}
           className={`flex text-xl text-white whitespace-nowrap items-center font-cbold`}
         >
           <img src={logo} alt="logo" className=" object-cover h-[50px]" />
-          <h2 className="text-primary font-cbold text-xl ml-2 font-medium">
+          <h2 className="text-primary font-cbold text-xl ml-2 font-medium xl:block lg:block md:block hidden">
             Workhance.
           </h2>
         </Link>
@@ -62,20 +62,20 @@ const Navbar = () => {
             />
           )}
           {user && (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 ">
               <SearchBar />
               <Link to={"/post-job"}
-              className="text-gray-600 font-medium hover:text-primary hover:underline"
+                className="text-gray-600 font-medium hover:text-primary hover:underline xl:block lg:block md:block hidden"
               >Post a Job</Link>
               <div>
-                <IoMdNotifications className="text-2xl text-gray-500" />
+                <IoMdNotifications className="text-2xl text-gray-500 hidden xl:block" />
               </div>
               <AccountDrawer />
             </div>
           )}
         </span>
 
-        <div className={`${styles.hb} flex-1 justify-end items-center`}>
+        {/* <div className={`${styles.hb}  items-center`}>
           {toggle ? (
             <AiOutlineClose
               className="w-[28px] text-white cursor-pointer h-[28px] object-contain"
@@ -86,11 +86,10 @@ const Navbar = () => {
               className="w-[28px] text-white cursor-pointer h-[28px] object-contain"
               onClick={() => setToggle(!toggle)}
             />
-          )}
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
+          )} */}
+        {/* <div
+            className={`${!toggle ? "hidden" : "flex"
+              } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
           >
             <ul
               className={`list-none z-50 flex justify-end items-start flex-1 flex-col bg-fuchsia-900 p-10 rounded-3xl`}
@@ -104,10 +103,10 @@ const Navbar = () => {
                 >
                   <p>{nav.title}</p>
                 </Link>
-              ))} */}
+              ))} 
             </ul>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </nav>
     </header>
   );

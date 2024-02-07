@@ -5,17 +5,16 @@ import Recommendations from "./Recommendations";
 const SearchBar = () => {
   const [focus, setFocus] = useState(false);
   const [search, setSearch] = useState("");
-  useEffect(()=>{
+  useEffect(() => {
     if (search) {
-        setFocus(true)
+      setFocus(true)
     }
   }, [focus, search])
 
   return (
     <div
-      className={`flex relative items-center gap-2 border border-gray-300 rounded-md px-2 transition-all duration-200 py-1 ${
-        focus ? "w-96 border-black" : "w-72"
-      }`}
+      className={`flex relative items-center gap-2 border border-gray-300 rounded-md px-2 transition-all duration-200 py-1 ${focus ? "w-96 border-black" : "w-40 xl:w-72"
+        }`}
     >
       <div>
         <FiSearch className="text-gray-500 text-xl" />

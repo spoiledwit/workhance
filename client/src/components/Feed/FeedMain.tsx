@@ -43,7 +43,7 @@ const FeedMain = () => {
   };
 
   return (
-    <div className="w-full px-6">
+    <div className="w-full px-6 flex flex-col gap-2">
       <PostUploader />
       {posts.map((post) => (
         <Post key={post._id} post={post} setPosts={setPosts} />

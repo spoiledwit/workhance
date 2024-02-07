@@ -43,7 +43,7 @@ const Register = () => {
       <h1 className="text-center font-medium text-2xl text-black mb-6">
         Register
       </h1>
-      <div className="flex  justify-center">
+      <div className="flex w-full px-4 lg:w-fit md:w-fit xl:w-fit xl:px-0 lg:px-0 md:px-0   justify-center">
         <div className="w-full">
           <div className="bg-white md:w-[400px] rounded-lg shadow-lg border p-5">
             <form onSubmit={handleSubmit}>
@@ -69,7 +69,7 @@ const Register = () => {
                   Email
                 </label>
                 <Input
-                onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   id="email"
                   type="email"
                   placeholder="Email"
@@ -83,7 +83,7 @@ const Register = () => {
                   Password
                 </label>
                 <Input
-                onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   id="password"
                   type="password"
                   placeholder="Password"

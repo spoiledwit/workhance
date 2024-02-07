@@ -63,7 +63,7 @@ const LeftSideBarBottom = () => {
           <></>
         ) : (
           <div
-          className="flex flex-wrap gap-3 mt-2"
+            className="flex flex-wrap gap-3 mt-2"
           >
             {jobs.map((job: any) => (
               <Link
@@ -78,7 +78,7 @@ const LeftSideBarBottom = () => {
                   <div>
                     <h3 className="font-medium text-sm">{job.jobTitle}</h3>
                     <p
-                    className="text-xs font-light text-gray-500"
+                      className="text-xs font-light text-gray-500"
                     >
                       {job.advertisingLocation}
                     </p>
@@ -95,7 +95,7 @@ const LeftSideBarBottom = () => {
 
 const LeftSideBar = () => {
   return (
-    <div className="w-1/3 rounded max-h-[550px] border">
+    <div className="w-1/3 rounded h-full border sm:hidden xl:block hidden">
       <LeftSideBarTop />
       <hr />
       <LeftSideBarBottom />

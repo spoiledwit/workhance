@@ -7,8 +7,8 @@ const PostJob = () => {
   const { user, employer } = useAuthStore();
 
   return (
-    <div className="px-32 py-10">
-      {user && !employer && <EmployerReg />}  
+    <div className="xl:px-32 lg:px-32 md:px-32 px-8 py-10">
+      {user && !employer && <EmployerReg />}
       {employer && !employer?.isVerified && <EmployerVerification />}
       {employer && employer?.isVerified && <PostJobForm />}
     </div>

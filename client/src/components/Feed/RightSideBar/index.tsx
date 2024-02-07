@@ -32,7 +32,7 @@ const RightSideBar = () => {
   };
 
   return (
-    <div className="border rounded w-1/3 max-h-[550px] p-4">
+    <div className="border rounded w-1/3 h-full p-4 hidden xl:block lg:block md:block">
       <span className="flex items-center justify-between">
         <h3 className="font-semibold mb-2">Add to your feed</h3>
         <HiOutlineInformationCircle />

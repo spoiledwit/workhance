@@ -18,7 +18,7 @@ const Login = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (!email || !password) {
-            toast.error("Please fill all fields"); 
+            toast.error("Please fill all fields");
             return;
         }
         try {
@@ -32,9 +32,9 @@ const Login = () => {
             navigate("/");
         } catch (error: any) {
             setLoading(false);
-            if (error.response?.data){
+            if (error.response?.data) {
                 toast.error(error.response.data);
-                return; 
+                return;
             }
             toast.error("Something went wrong, please try again")
         }
@@ -43,8 +43,8 @@ const Login = () => {
     return (
         <div className="mt-20 flex-col w-full flex items-center justify-center space-y-6">
             <h1 className="text-center font-semibold text-3xl text-black">Login</h1>
-            <div className="flex justify-center">
-                <div className="bg-white md:w-[400px] rounded-lg shadow-xl border p-8 w-full max-w-md">
+            <div className="flex justify-center px-4 xl:px-0 lg:px-0 md:px-0 w-full lg:w-fit md:w-fit xl:w-fit">
+                <div className="bg-white md:w-[400px] rounded-lg shadow-xl border p-8 w-full max-w-md ">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="email">
@@ -62,14 +62,14 @@ const Login = () => {
                                 Password
                             </label>
                             <Input
-                              onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => setPassword(e.target.value)}
                                 id="password"
                                 type="password"
                                 placeholder="Password"
                             />
                         </div>
                         <div>
-                            <LoadingButton 
+                            <LoadingButton
                                 isLoading={loading}
                                 onClick={handleSubmit}
                                 text="Login"
