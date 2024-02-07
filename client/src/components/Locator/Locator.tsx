@@ -30,6 +30,7 @@ const Locator = ({
   region?: string;
   radius?: number;
 }) => {
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: API_KEY,
     //@ts-ignore
