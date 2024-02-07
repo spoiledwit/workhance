@@ -24,10 +24,10 @@ const PostUploaderDialog = ({
 
   const handlePost = async () => {
     setLoading(true);
-    const formData = new FormData(); 
-    formData.append("caption", caption); 
+    const formData = new FormData();
+    formData.append("caption", caption);
     if (imageFile) {
-      formData.append("image", imageFile); 
+      formData.append("image", imageFile);
     }
 
     try {
@@ -50,7 +50,7 @@ const PostUploaderDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="w-[700px] max-h-[600px] overflow-y-auto">
+      <DialogContent className="max-h-[600px] xl:max-w-lg md:max-w-lg lg:max-w-lg sm:max-w-[400px] max-w-[350px] overflow-y-auto rounded">
         <DialogHeader>
           <DialogTitle>Post</DialogTitle>
           <DialogDescription>
@@ -63,9 +63,8 @@ const PostUploaderDialog = ({
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
             placeholder="What's on your mind?"
-            className={`w-full h-full p-4 resize-none outline-none border-none ${
-              !imageFile && "min-h-[200px]"
-            } `}
+            className={`w-full h-full p-4 resize-none outline-none border-none ${!imageFile && "min-h-[200px]"
+              } `}
           />
           {imageFile && (
             <div className="w-full h-full p-4 resize-none outline-none border-none">
@@ -94,7 +93,7 @@ const PostUploaderDialog = ({
             }}
           />
         </div>
-        <DialogFooter className="justify-start border-t pt-4">
+        <DialogFooter className="justify-start border-t pt-4 flex flex-col-reverse gap-2 xl:gap-0 lg:gap-0 md:gap-0 ">
           <Button
             variant="default"
             onClick={() => {
